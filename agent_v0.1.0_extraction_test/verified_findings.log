@@ -1,0 +1,1 @@
+[2026-05-23T18:57:52.215429+02:00] SIGNATURE: 1875c22b86fbab485baf4edc7cd5fcceb884bd4d0919252deca3de71938286b2 | FINDING: PID 8312 (SearchApp.exe) is compromised: exhibits PAGE_EXECUTE_READWRITE memory anomalies and active network connections, with no corresponding disk artifact.

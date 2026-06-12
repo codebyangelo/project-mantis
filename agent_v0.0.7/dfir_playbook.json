@@ -1,0 +1,11 @@
+{
+  "framework": "NIST SP 800-61 Rev. 2 / MITRE ATT&CK",
+  "phase": "Detection and Analysis",
+  "mitre_mappings": {
+    "Process Hollowing (T1055.012)": "Correlate malfind (PAGE_EXECUTE_READWRITE with MZ headers) against pstree. High probability if target is svchost.exe.",
+    "DLL Sideloading (T1574.002)": "Analyze AppData execution paths. IMPORTANT: Exclude signed UCRT deployments (api-ms-win-*).",
+    "Command and Scripting Interpreter (T1059)": "Analyze cmdline for powershell.exe -enc, -w hidden, or cmd.exe executing from \\Temp\\ or \\Public\\.",
+    "Application Layer Protocol (T1071)": "Correlate netscan active outbound sockets with pstree. Flag non-network binaries (calc, spoolsv) establishing connections."
+  },
+  "execution_mandate": "Do not hypothesize based on single metrics. Triangulate cache data across pstree, netscan, and malfind. Extract anomalous inodes using icat for cryptographic verification."
+}

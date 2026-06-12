@@ -1,0 +1,290 @@
+{
+  "playbook_version": "1.0.1",
+  "nist_mapping": "SP 800-61r2 Detection & Analysis",
+  "rules": [
+    {
+      "rule_id": "PROC_INJ_001",
+      "name": "RWX Memory Allocation in System Process",
+      "nist_phase": "Detection & Analysis",
+      "nist_step": "Analyze Indicators",
+      "threat_category": "Process Injection",
+      "target_artifact": "process",
+      "evaluation_logic": {
+        "conditions": [
+          {"field": "signals", "operator": "contains", "value": "SIG_RWX_INJECTION"}
+        ],
+        "conjunction": "AND"
+      },
+      "false_positive_disproval": [
+        {
+          "check_id": "FP_001_JIT_VERIFICATION",
+          "description": "DETERMINISTIC: This check is now handled by sieve_deterministic.py. The LLM should NOT attempt to classify assembly patterns. If deterministic layer flagged TRAMPOLINE, Defense Attorney must verify the classification matches raw evidence. If deterministic layer flagged JIT_PADDING or CFG, Defense Attorney confirms disproval.",
+          "disproval_logic": "IF deterministic classification is JIT_PADDING OR CFG OR DEFENDER_EMULATION THEN DISPROVE. IF deterministic classification is TRAMPOLINE THEN FAIL_TO_DISPROVE.",
+          "llm_role": "AUDIT_ONLY"
+        },
+        {
+          "check_id": "FP_004_DEFENDER_EMULATION",
+          "description": "MsMpEng.exe is the Microsoft Defender engine. It dynamically allocates RWX memory (VadS) for its internal signature scanning and emulation environment. This memory often contains instructions like 'jmp rdx', 'int3', and various register operations. This is completely legitimate behavior for Defender and NOT process injection.",
+          "disproval_logic": "IF Process is MsMpEng.exe AND malfind telemetry is consistent with emulation (e.g., 'jmp rdx', 'int3') THEN DISPROVE."
+        },
+        {
+          "check_id": "FP_002_DYNAMIC_TIMELINE_CORRELATION",
+          "description": "If the process exhibits suspicious memory, you MUST dynamically investigate its origin. Use `request_disk_search` with the process name or 'MEI' to find PyInstaller droppers. If dynamic correlation proves a fileless payload, FAIL to disprove.",
+          "disproval_logic": "IF dynamic investigation reveals dropper artifacts THEN FAIL_TO_DISPROVE."
+        }
+      ],
+      "mitre_mapping": {
+        "technique": "T1055",
+        "tactic": "Defense Evasion",
+        "procedure": "Process Injection: RWX shellcode in system process"
+      },
+      "severity_if_confirmed": "CRITICAL"
+    },
+    {
+      "rule_id": "PROC_MASQ_001",
+      "name": "Process Name Masquerading",
+      "nist_phase": "Detection & Analysis",
+      "nist_step": "Analyze Indicators",
+      "threat_category": "Defense Evasion",
+      "target_artifact": "process",
+      "evaluation_logic": {
+        "conditions": [
+          {"field": "signals", "operator": "contains", "value": "SIG_MASQUERADING"}
+        ],
+        "conjunction": "AND"
+      },
+      "false_positive_disproval": [
+        {
+          "check_id": "FP_003_LEGITIMATE_TRUNCATION",
+          "description": "Check if the process name truncation is an artifact of the 15-character EPROCESS limit in the Windows kernel (e.g., smartscreen.ex from smartscreen.exe).",
+          "disproval_logic": "IF Process name length is exactly 14 characters plus extension OR is a known truncated baseline process THEN DISPROVE."
+        }
+      ],
+      "mitre_mapping": {
+        "technique": "T1036",
+        "tactic": "Defense Evasion",
+        "procedure": "Masquerading"
+      },
+      "severity_if_confirmed": "HIGH"
+    },
+    {
+      "rule_id": "DATA_EXFIL_001",
+      "name": "Staging Archive in Temporary or User Directory",
+      "nist_phase": "Detection & Analysis",
+      "nist_step": "Analyze Indicators",
+      "threat_category": "Data Exfiltration",
+      "target_artifact": "file",
+      "evaluation_logic": {
+        "conditions": [
+          {"field": "path", "operator": "regex_match", "value": "\\.(zip|rar|7z|tar\\.gz)$"},
+          {"field": "signals", "operator": "contains", "value": "SIG_DATA_LEAKAGE_INDICATOR"}
+        ],
+        "conjunction": "AND"
+      },
+      "false_positive_disproval": [
+        {
+          "check_id": "FP_004_KNOWN_BACKUP_OR_PERSONAL_FILE",
+          "description": "Check if the archive is a scheduled IT backup OR a benign personal file (like a game, mod, or regular user download) unrelated to any active threat.",
+          "disproval_logic": "IF archive name matches corporate backup schema OR file appears to be a legitimate personal download (e.g. video games, mods) without ties to suspicious processes THEN DISPROVE."
+        }
+      ],
+      "mitre_mapping": {
+        "technique": "T1048",
+        "tactic": "Exfiltration",
+        "procedure": "Exfiltration Over Alternative Protocol / Staging"
+      },
+      "severity_if_confirmed": "HIGH"
+    },
+    {
+      "rule_id": "DATA_EXFIL_002",
+      "name": "Data Leakage via Shortcut (.lnk)",
+      "nist_phase": "Detection & Analysis",
+      "nist_step": "Analyze Indicators",
+      "threat_category": "Data Exfiltration",
+      "target_artifact": "file",
+      "evaluation_logic": {
+        "conditions": [
+          {"field": "path", "operator": "regex_match", "value": "\\.lnk"},
+          {"field": "signals", "operator": "contains", "value": "SIG_DATA_LEAKAGE_INDICATOR"}
+        ],
+        "conjunction": "AND"
+      },
+      "false_positive_disproval": [
+        {
+          "check_id": "FP_005_LEGITIMATE_ACCESS_OR_PERSONAL_FILE",
+          "description": "Verify if the user is authorized to access the destination drive/folder, or if the shortcut simply points to a benign personal file (like a game or document).",
+          "disproval_logic": "IF User is authorized and destination is a corporate network share OR shortcut clearly points to a benign personal file (e.g. video games, personal docs) THEN DISPROVE."
+        }
+      ],
+      "mitre_mapping": {
+        "technique": "T1048",
+        "tactic": "Exfiltration",
+        "procedure": "Exfiltration Over Alternative Protocol / USB"
+      },
+      "severity_if_confirmed": "HIGH"
+    },
+    {
+      "rule_id": "COLLECTION_001",
+      "name": "Automated Collection Script in Temp",
+      "nist_phase": "Detection & Analysis",
+      "nist_step": "Analyze Indicators",
+      "threat_category": "Collection",
+      "target_artifact": "file",
+      "evaluation_logic": {
+        "conditions": [
+          {"field": "path", "operator": "regex_match", "value": "\\.(bat|ps1|vbs|cmd)$"}
+        ],
+        "conjunction": "AND"
+      },
+      "false_positive_disproval": [
+        {
+          "check_id": "FP_006_SYSTEM_INSTALLER",
+          "description": "Check if the script is part of a legitimate MSI installer or software updater.",
+          "disproval_logic": "IF Script is known software updater THEN DISPROVE."
+        }
+      ],
+      "mitre_mapping": {
+        "technique": "T1119",
+        "tactic": "Collection",
+        "procedure": "Automated Collection"
+      },
+      "severity_if_confirmed": "HIGH"
+    },
+    {
+      "rule_id": "EXECUTION_001",
+      "name": "Dropped Executable Payload",
+      "nist_phase": "Detection & Analysis",
+      "nist_step": "Analyze Indicators",
+      "threat_category": "Execution",
+      "target_artifact": "file",
+      "evaluation_logic": {
+        "conditions": [
+          {"field": "path", "operator": "regex_match", "value": "\\.(exe|dll|sys)$"},
+          {"field": "path", "operator": "regex_match", "value": "(_MEI|Temp|tmp)"}
+        ],
+        "conjunction": "AND"
+      },
+      "false_positive_disproval": [
+        {
+          "check_id": "FP_007_LEGITIMATE_TEMP_APP",
+          "description": "Verify if the binary belongs to a legitimate self-extracting application or installer.",
+          "disproval_logic": "IF Binary is a known benign installer THEN DISPROVE."
+        }
+      ],
+      "mitre_mapping": {
+        "technique": "T1204",
+        "tactic": "Execution",
+        "procedure": "User Execution / Malicious File"
+      },
+      "severity_if_confirmed": "CRITICAL"
+    },
+    {
+      "rule_id": "ANTI_FORENSICS_001",
+      "name": "Data Destruction and Evidence Concealment",
+      "nist_phase": "Detection & Analysis",
+      "nist_step": "Analyze Indicators",
+      "threat_category": "Anti-Forensics",
+      "target_artifact": "file",
+      "evaluation_logic": {
+        "conditions": [
+          {"field": "path", "operator": "regex_match", "value": "(SDelete|Eraser|CCleaner|deleted)"}
+        ],
+        "conjunction": "AND"
+      },
+      "false_positive_disproval": [
+        {
+          "check_id": "FP_008_AUTHORIZED_WIPE",
+          "description": "Check if the secure wipe was performed during authorized decommissioning or normal user cleanup.",
+          "disproval_logic": "IF action performed by IT Admin during decommission THEN DISPROVE."
+        }
+      ],
+      "mitre_mapping": {
+        "technique": "T1485",
+        "tactic": "Impact",
+        "procedure": "Data Destruction / Indicator Removal"
+      },
+      "severity_if_confirmed": "CRITICAL"
+    },
+    {
+      "rule_id": "PERSISTENCE_001",
+      "name": "Malicious Registry Hive Persistence",
+      "nist_phase": "Detection & Analysis",
+      "nist_step": "Analyze Indicators",
+      "threat_category": "Persistence",
+      "target_artifact": "registry_hive",
+      "evaluation_logic": {
+        "conditions": [
+          {"field": "inode", "operator": "exists", "value": "true"}
+        ],
+        "conjunction": "OR"
+      },
+      "false_positive_disproval": [
+        {
+          "check_id": "FP_009_KNOWN_SOFTWARE",
+          "description": "Verify if the autorun entry belongs to digitally signed baseline software.",
+          "disproval_logic": "IF registry path points to signed standard software THEN DISPROVE."
+        }
+      ],
+      "mitre_mapping": {
+        "technique": "T1547.001",
+        "tactic": "Persistence",
+        "procedure": "Registry Run Keys / Startup Folder"
+      },
+      "severity_if_confirmed": "HIGH"
+    },
+    {
+      "rule_id": "USB_EXFIL_001",
+      "name": "USB Device Data Exfiltration",
+      "nist_phase": "Detection & Analysis",
+      "nist_step": "Analyze Indicators",
+      "threat_category": "Data Exfiltration",
+      "target_artifact": "registry_hive",
+      "evaluation_logic": {
+        "conditions": [
+          {"field": "hive_type", "operator": "contains", "value": "SYSTEM"}
+        ],
+        "conjunction": "AND"
+      },
+      "false_positive_disproval": [
+        {
+          "check_id": "FP_010_AUTHORIZED_USB",
+          "description": "CRITICAL: You MUST set request_deep_carve to true to extract strings and verify the presence of USBSTOR keys. If you haven't received carved strings yet, set request_deep_carve=true. If carved strings show USBSTOR or removable media identifiers, FAIL to disprove.",
+          "disproval_logic": "IF USB device is corporate issued AND user is authorized THEN DISPROVE."
+        }
+      ],
+      "mitre_mapping": {
+        "technique": "T1052.001",
+        "tactic": "Exfiltration",
+        "procedure": "Exfiltration over Physical Medium"
+      },
+      "severity_if_confirmed": "CRITICAL"
+    },
+    {
+      "rule_id": "USB_LNK_001",
+      "name": "Removable Media LNK Activity",
+      "nist_phase": "Detection & Analysis",
+      "nist_step": "Analyze Indicators",
+      "threat_category": "Data Exfiltration",
+      "target_artifact": "file",
+      "evaluation_logic": {
+        "conditions": [
+          {"field": "path", "operator": "regex_match", "value": "\\.lnk"}
+        ],
+        "conjunction": "AND"
+      },
+      "false_positive_disproval": [
+        {
+          "check_id": "FP_011_AUTHORIZED_MEDIA",
+          "description": "Check if the LNK file points to an explicitly authorized corporate backup network share. The evaluator must strictly verify the destination drive letter and path type. CRITICAL: A volume label containing the string 'Authorized' (e.g. 'Authorized USB') DOES NOT make a removable external drive authorized! Removable media (e.g. E: or F: drives, Volume Serial Numbers) are strictly unauthorized for taking data off-premises. You MUST FAIL TO DISPROVE if the destination is removable media, regardless of its volume label.",
+          "disproval_logic": "IF LNK points to a corporate network share THEN DISPROVE. IF it points to removable media THEN FAIL_TO_DISPROVE."
+        }
+      ],
+      "mitre_mapping": {
+        "technique": "T1052.001",
+        "tactic": "Exfiltration",
+        "procedure": "Exfiltration over Physical Medium"
+      },
+      "severity_if_confirmed": "HIGH"
+    }
+  ]
+}

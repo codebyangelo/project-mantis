@@ -1,0 +1,423 @@
+[2026-06-12 19:56:52] [SUCCESS] [ORCHESTRATOR] Cache context verified.
+[2026-06-12 19:56:52] [INFO] [AGENT] Initializing MantisAgent with provider: VERTEX
+[2026-06-12 19:56:52] [INFO] [AGENT] System instructions loaded successfully.
+[2026-06-12 19:56:52] [INFO] [AGENT] Creating generative API session with JSON schema constraints.
+[2026-06-12 19:56:52] [INFO] [ORCHESTRATOR] Auto-executing investigation pipeline...
+[2026-06-12 19:56:52] [INFO] [ORCHESTRATOR] Initializing Exhaustive Deterministic State Machine...
+[2026-06-12 19:56:52] [INFO] [MCP_SERVER] Executing get_evidence_context()
+[2026-06-12 19:56:52] [INFO] [MCP_SERVER] Context cache found.
+[2026-06-12 19:56:54] [INFO] [ORCHESTRATOR] Evidence Context Acquired.
+[2026-06-12 19:56:54] [INFO] [ORCHESTRATOR] SMPT Phase 1: Building multi-signal Entity index...
+[2026-06-12 19:56:55] [INFO] [ORCHESTRATOR] SMPT Phase 2: Running deterministic scoring...
+[2026-06-12 19:56:55] [SUCCESS] [ORCHESTRATOR] SMPT complete. Total=128 | Critical=0 | High=128 | Cleared=0
+[2026-06-12 19:56:55] [INFO] [ORCHESTRATOR] SMPT Phase 3: Selected 17 Entities for LLM.
+[2026-06-12 19:56:55] [INFO] [ORCHESTRATOR] Proceeding to iterate 17 highly-suspect Entities deterministically.
+[2026-06-12 19:56:55] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/inf.lnk ($FILE_NAME)
+[2026-06-12 19:56:59] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 19:57:04] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 7216 (In: 6534, Out: 682)
+[2026-06-12 19:57:04] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/inf.lnk ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 19:57:04] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact meets all evaluation criteria for DATA_EXFIL_002, but the false positive disproval check is inconclusive due to missing target path telemetry in the provided artifact.
+[2026-06-12 19:57:04] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 19:57:04] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/setupapi.dev.lnk ($FILE_NAME)
+[2026-06-12 19:57:08] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 19:57:12] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 12101 (In: 11416, Out: 685)
+[2026-06-12 19:57:12] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/setupapi.dev.lnk ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 19:57:12] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact meets all evaluation criteria for DATA_EXFIL_002, but the false positive disproval check is inconclusive due to missing target path telemetry in the provided artifact.
+[2026-06-12 19:57:12] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 19:57:12] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Office/Recent/(secret_project)_pricing_decision.xlsx.LNK ($FILE_NAME)
+[2026-06-12 19:57:12] [INFO] [ORCHESTRATOR] Baseline Engine injected tags: ['NET_BASELINE_RFC1918:10.11.11.128', 'NET_BASELINE_CORPORATE:10.11.11.128']
+[2026-06-12 19:57:16] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 19:57:19] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 17170 (In: 16467, Out: 703)
+[2026-06-12 19:57:19] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/informant/AppData/Roaming/Microsoft/Office/Recent/(secret_project)_pricing_decision.xlsx.LNK ($FILE_NAME)': BENIGN (Confidence: HIGH)
+[2026-06-12 19:57:19] [INFO] [ORCHESTRATOR] LLM Reasoning: The shortcut points to a verified corporate network share (10.11.11.128), which disproves the exfiltration indicator.
+[2026-06-12 19:57:19] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 19:57:19] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Office/Recent/Desktop.LNK ($FILE_NAME)
+[2026-06-12 19:57:23] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 19:57:31] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 22049 (In: 21367, Out: 682)
+[2026-06-12 19:57:31] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/informant/AppData/Roaming/Microsoft/Office/Recent/Desktop.LNK ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 19:57:31] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact meets all evaluation criteria for DATA_EXFIL_002, but the false positive disproval check is inconclusive due to missing target path telemetry in the provided artifact.
+[2026-06-12 19:57:31] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 19:57:31] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Office/Recent/Resignation_Letter_(Iaman_Informant).docx.LNK ($FILE_NAME)
+[2026-06-12 19:57:35] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 19:57:39] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 27028 (In: 26335, Out: 693)
+[2026-06-12 19:57:39] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/informant/AppData/Roaming/Microsoft/Office/Recent/Resignation_Letter_(Iaman_Informant).docx.LNK ($FILE_NAME)': BENIGN (Confidence: HIGH)
+[2026-06-12 19:57:39] [INFO] [ORCHESTRATOR] LLM Reasoning: The shortcut points to a local file on the user's desktop, which is a standard and benign location for personal documents.
+[2026-06-12 19:57:39] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 19:57:39] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Office/Recent/Templates.LNK ($FILE_NAME)
+[2026-06-12 19:57:43] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 19:57:48] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 31907 (In: 31225, Out: 682)
+[2026-06-12 19:57:48] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/informant/AppData/Roaming/Microsoft/Office/Recent/Templates.LNK ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 19:57:48] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact meets all evaluation criteria for DATA_EXFIL_002, but the false positive disproval check is inconclusive due to missing target path telemetry in the provided artifact.
+[2026-06-12 19:57:48] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 19:57:48] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Office/Recent/[secret_project]_design_concept.LNK ($FILE_NAME)
+[2026-06-12 19:57:52] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 19:57:56] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 36865 (In: 36177, Out: 688)
+[2026-06-12 19:57:56] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/informant/AppData/Roaming/Microsoft/Office/Recent/[secret_project]_design_concept.LNK ($FILE_NAME)': MALICIOUS (Confidence: HIGH)
+[2026-06-12 19:57:56] [INFO] [ORCHESTRATOR] LLM Reasoning: The LNK file points to an unauthorized removable media drive (E:), which is a direct indicator of data exfiltration over a physical medium.
+[2026-06-12 19:57:56] [INFO] [ORCHESTRATOR] Rule Applied: USB_LNK_001
+[2026-06-12 19:57:56] [WARN] [ORCHESTRATOR] Prosecutor ruled MALICIOUS. Invoking Defense Attorney...
+[2026-06-12 19:57:56] [INFO] [AGENT] Creating generative API session for Defense Attorney.
+[2026-06-12 19:58:00] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 19:58:08] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 5537 (In: 5314, Out: 223)
+[2026-06-12 19:58:08] [WARN] [ORCHESTRATOR] Defense Attorney FAILED TO DISPROVE the evidence.
+[2026-06-12 19:58:08] [INFO] [ORCHESTRATOR] Invoking Verifier LLM to audit the adversarial debate.
+[2026-06-12 19:58:08] [INFO] [AGENT] Creating generative API session for Verifier.
+[2026-06-12 19:58:12] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 19:58:19] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 1345 (In: 1266, Out: 79)
+[2026-06-12 19:58:19] [SUCCESS] [ORCHESTRATOR] VERIFIER PASSED the claims.
+[2026-06-12 19:58:19] [CRITICAL] [ORCHESTRATOR] THREAT ISOLATED: file '/Users/informant/AppData/Roaming/Microsoft/Office/Recent/[secret_project]_design_concept.LNK ($FILE_NAME)' is MALICIOUS.
+[2026-06-12 19:58:19] [INFO] [ORCHESTRATOR] Committing finding to historical IOC store (atomic write).
+[2026-06-12 19:58:19] [SUCCESS] [ORCHESTRATOR] IOC Store commit successful.
+[2026-06-12 19:58:19] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Office/Recent/[secret_project]_final_meeting.pptx.LNK ($FILE_NAME)
+[2026-06-12 19:58:23] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 19:58:43] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 41808 (In: 41113, Out: 695)
+[2026-06-12 19:58:43] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/informant/AppData/Roaming/Microsoft/Office/Recent/[secret_project]_final_meeting.pptx.LNK ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 19:58:43] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact meets all evaluation criteria for DATA_EXFIL_002, but the false positive disproval check is inconclusive due to missing target path telemetry in the provided artifact.
+[2026-06-12 19:58:43] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 19:58:43] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Office/Recent/[secret_project]_proposal.LNK ($FILE_NAME)
+[2026-06-12 19:58:47] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 19:59:03] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 46745 (In: 46072, Out: 673)
+[2026-06-12 19:59:03] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/informant/AppData/Roaming/Microsoft/Office/Recent/[secret_project]_proposal.LNK ($FILE_NAME)': MALICIOUS (Confidence: HIGH)
+[2026-06-12 19:59:03] [INFO] [ORCHESTRATOR] LLM Reasoning: The LNK file points to an unauthorized removable media drive (E:), which is a direct indicator of data exfiltration over a physical medium.
+[2026-06-12 19:59:03] [INFO] [ORCHESTRATOR] Rule Applied: USB_LNK_001
+[2026-06-12 19:59:03] [WARN] [ORCHESTRATOR] Prosecutor ruled MALICIOUS. Invoking Defense Attorney...
+[2026-06-12 19:59:03] [INFO] [AGENT] Creating generative API session for Defense Attorney.
+[2026-06-12 19:59:07] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 19:59:13] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 5521 (In: 5293, Out: 228)
+[2026-06-12 19:59:13] [WARN] [ORCHESTRATOR] Defense Attorney FAILED TO DISPROVE the evidence.
+[2026-06-12 19:59:13] [INFO] [ORCHESTRATOR] Invoking Verifier LLM to audit the adversarial debate.
+[2026-06-12 19:59:13] [INFO] [AGENT] Creating generative API session for Verifier.
+[2026-06-12 19:59:17] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 19:59:20] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 1340 (In: 1251, Out: 89)
+[2026-06-12 19:59:20] [SUCCESS] [ORCHESTRATOR] VERIFIER PASSED the claims.
+[2026-06-12 19:59:20] [CRITICAL] [ORCHESTRATOR] THREAT ISOLATED: file '/Users/informant/AppData/Roaming/Microsoft/Office/Recent/[secret_project]_proposal.LNK ($FILE_NAME)' is MALICIOUS.
+[2026-06-12 19:59:20] [INFO] [ORCHESTRATOR] Committing finding to historical IOC store (atomic write).
+[2026-06-12 19:59:20] [SUCCESS] [ORCHESTRATOR] IOC Store commit successful.
+[2026-06-12 19:59:20] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Templates/LiveContent/15/Managed/Word Document Building Blocks/1033/TM02835270[[fn=Photo Sidebar (Annual Report Red and Black design)]].docx (deleted)
+[2026-06-12 19:59:24] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 19:59:28] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 51528 (In: 50909, Out: 619)
+[2026-06-12 19:59:28] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/informant/AppData/Roaming/Microsoft/Templates/LiveContent/15/Managed/Word Document Building Blocks/1033/TM02835270[[fn=Photo Sidebar (Annual Report Red and Black design)]].docx (deleted)': BENIGN (Confidence: HIGH)
+[2026-06-12 19:59:28] [INFO] [ORCHESTRATOR] LLM Reasoning: The deleted file is a standard Microsoft Office template, which is consistent with normal application behavior and does not indicate malicious data destruction.
+[2026-06-12 19:59:28] [INFO] [ORCHESTRATOR] Rule Applied: ANTI_FORENSICS_001
+[2026-06-12 19:59:28] [WARN] [ORCHESTRATOR] EVALUATING EVENT_LOG: EVTX System.evtx ($FILE_NAME)
+[2026-06-12 19:59:32] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 19:59:37] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 56188 (In: 55615, Out: 573)
+[2026-06-12 19:59:37] [INFO] [ORCHESTRATOR] LLM Verdict for event_log 'EVTX System.evtx ($FILE_NAME)': BENIGN (Confidence: HIGH)
+[2026-06-12 19:59:37] [INFO] [ORCHESTRATOR] LLM Reasoning: The event log hits refer to hostnames and standard system paths, not process masquerading.
+[2026-06-12 19:59:37] [INFO] [ORCHESTRATOR] Rule Applied: PROC_MASQ_001
+[2026-06-12 19:59:37] [WARN] [ORCHESTRATOR] EVALUATING EVENT_LOG: EVTX System.evtx
+[2026-06-12 19:59:41] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 19:59:50] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 60844 (In: 60271, Out: 573)
+[2026-06-12 19:59:50] [INFO] [ORCHESTRATOR] LLM Verdict for event_log 'EVTX System.evtx': BENIGN (Confidence: HIGH)
+[2026-06-12 19:59:50] [INFO] [ORCHESTRATOR] LLM Reasoning: The event log hits refer to hostnames and standard system paths, not process masquerading.
+[2026-06-12 19:59:50] [INFO] [ORCHESTRATOR] Rule Applied: PROC_MASQ_001
+[2026-06-12 19:59:50] [WARN] [ORCHESTRATOR] EVALUATING REGISTRY_HIVE: SYSTEM Hive
+[2026-06-12 19:59:54] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 19:59:59] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 65420 (In: 64876, Out: 544)
+[2026-06-12 19:59:59] [INFO] [ORCHESTRATOR] LLM Verdict for registry_hive 'SYSTEM Hive': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 19:59:59] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact meets the evaluation criteria for USB_EXFIL_001, but the false positive disproval check is inconclusive pending a deep carve of the registry hive.
+[2026-06-12 19:59:59] [INFO] [ORCHESTRATOR] Rule Applied: USB_EXFIL_001
+[2026-06-12 19:59:59] [INFO] [ORCHESTRATOR] LLM requested dynamic deep carve for indicators.
+[2026-06-12 19:59:59] [INFO] [MCP_SERVER] Starting Physical Hive Extraction (Inode: 58912)
+[2026-06-12 19:59:59] [INFO] [MCP_SERVER] Validating path security for: /media/angelo/kali-external/home/angelo/Desktop/pm_cfreds_evidence/cfreds_2015_data_leakage_pc.dd
+[2026-06-12 19:59:59] [SUCCESS] [MCP_SERVER] Path validated securely: /media/angelo/kali-external/home/angelo/Desktop/pm_cfreds_evidence/cfreds_2015_data_leakage_pc.dd
+[2026-06-12 19:59:59] [INFO] [MCP_SERVER] Executing pipeline: icat 58912 | strings -el
+[2026-06-12 20:00:00] [SUCCESS] [MCP_SERVER] Hive carve clean.
+[2026-06-12 20:00:00] [INFO] [ORCHESTRATOR] Dynamic deep carve completed.
+[2026-06-12 20:00:00] [INFO] [ORCHESTRATOR] Feeding carve results back to LLM for final verdict.
+[2026-06-12 20:00:04] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:00:25] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 66114 (In: 65496, Out: 618)
+[2026-06-12 20:00:25] [INFO] [ORCHESTRATOR] Final LLM Verdict for registry_hive 'SYSTEM Hive': BENIGN (Confidence: HIGH)
+[2026-06-12 20:00:25] [WARN] [ORCHESTRATOR] EVALUATING REGISTRY_HIVE: SOFTWARE Hive
+[2026-06-12 20:00:29] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:00:39] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 70687 (In: 70146, Out: 541)
+[2026-06-12 20:00:39] [INFO] [ORCHESTRATOR] LLM Verdict for registry_hive 'SOFTWARE Hive': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:00:39] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact meets the evaluation criteria for PERSISTENCE_001, but the false positive disproval check is inconclusive pending a deep carve of the registry hive.
+[2026-06-12 20:00:39] [INFO] [ORCHESTRATOR] Rule Applied: PERSISTENCE_001
+[2026-06-12 20:00:39] [INFO] [ORCHESTRATOR] LLM requested dynamic deep carve for indicators.
+[2026-06-12 20:00:39] [INFO] [MCP_SERVER] Starting Physical Hive Extraction (Inode: 58910)
+[2026-06-12 20:00:39] [INFO] [MCP_SERVER] Validating path security for: /media/angelo/kali-external/home/angelo/Desktop/pm_cfreds_evidence/cfreds_2015_data_leakage_pc.dd
+[2026-06-12 20:00:39] [SUCCESS] [MCP_SERVER] Path validated securely: /media/angelo/kali-external/home/angelo/Desktop/pm_cfreds_evidence/cfreds_2015_data_leakage_pc.dd
+[2026-06-12 20:00:39] [INFO] [MCP_SERVER] Executing pipeline: icat 58910 | strings -el
+[2026-06-12 20:00:39] [SUCCESS] [MCP_SERVER] Hive carve clean.
+[2026-06-12 20:00:39] [INFO] [ORCHESTRATOR] Dynamic deep carve completed.
+[2026-06-12 20:00:39] [INFO] [ORCHESTRATOR] Feeding carve results back to LLM for final verdict.
+[2026-06-12 20:00:43] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:00:56] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 71368 (In: 70763, Out: 605)
+[2026-06-12 20:00:56] [INFO] [ORCHESTRATOR] Final LLM Verdict for registry_hive 'SOFTWARE Hive': BENIGN (Confidence: HIGH)
+[2026-06-12 20:00:56] [WARN] [ORCHESTRATOR] EVALUATING REGISTRY_HIVE: NTUSER Hive (/Users/admin11/NTUSER.DAT)
+[2026-06-12 20:01:00] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:01:11] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 75961 (In: 75418, Out: 543)
+[2026-06-12 20:01:11] [INFO] [ORCHESTRATOR] LLM Verdict for registry_hive 'NTUSER Hive (/Users/admin11/NTUSER.DAT)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:01:11] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact meets the evaluation criteria for PERSISTENCE_001, but the false positive disproval check is inconclusive pending a deep carve of the registry hive.
+[2026-06-12 20:01:11] [INFO] [ORCHESTRATOR] Rule Applied: PERSISTENCE_001
+[2026-06-12 20:01:11] [INFO] [ORCHESTRATOR] LLM requested dynamic deep carve for indicators.
+[2026-06-12 20:01:11] [INFO] [MCP_SERVER] Starting Physical Hive Extraction (Inode: 63037)
+[2026-06-12 20:01:11] [INFO] [MCP_SERVER] Validating path security for: /media/angelo/kali-external/home/angelo/Desktop/pm_cfreds_evidence/cfreds_2015_data_leakage_pc.dd
+[2026-06-12 20:01:11] [SUCCESS] [MCP_SERVER] Path validated securely: /media/angelo/kali-external/home/angelo/Desktop/pm_cfreds_evidence/cfreds_2015_data_leakage_pc.dd
+[2026-06-12 20:01:11] [INFO] [MCP_SERVER] Executing pipeline: icat 63037 | strings -el
+[2026-06-12 20:01:11] [SUCCESS] [MCP_SERVER] Hive carve clean.
+[2026-06-12 20:01:11] [INFO] [ORCHESTRATOR] Dynamic deep carve completed.
+[2026-06-12 20:01:11] [INFO] [ORCHESTRATOR] Feeding carve results back to LLM for final verdict.
+[2026-06-12 20:01:15] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:01:24] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 76656 (In: 76049, Out: 607)
+[2026-06-12 20:01:24] [INFO] [ORCHESTRATOR] Final LLM Verdict for registry_hive 'NTUSER Hive (/Users/admin11/NTUSER.DAT)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:01:24] [WARN] [ORCHESTRATOR] EVALUATING REGISTRY_HIVE: NTUSER Hive (/Users/informant/NTUSER.DAT)
+[2026-06-12 20:01:28] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:01:36] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 81246 (In: 80703, Out: 543)
+[2026-06-12 20:01:36] [INFO] [ORCHESTRATOR] LLM Verdict for registry_hive 'NTUSER Hive (/Users/informant/NTUSER.DAT)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:01:36] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact meets the evaluation criteria for PERSISTENCE_001, but the false positive disproval check is inconclusive pending a deep carve of the registry hive.
+[2026-06-12 20:01:36] [INFO] [ORCHESTRATOR] Rule Applied: PERSISTENCE_001
+[2026-06-12 20:01:36] [INFO] [ORCHESTRATOR] LLM requested dynamic deep carve for indicators.
+[2026-06-12 20:01:36] [INFO] [MCP_SERVER] Starting Physical Hive Extraction (Inode: 521)
+[2026-06-12 20:01:36] [INFO] [MCP_SERVER] Validating path security for: /media/angelo/kali-external/home/angelo/Desktop/pm_cfreds_evidence/cfreds_2015_data_leakage_pc.dd
+[2026-06-12 20:01:36] [SUCCESS] [MCP_SERVER] Path validated securely: /media/angelo/kali-external/home/angelo/Desktop/pm_cfreds_evidence/cfreds_2015_data_leakage_pc.dd
+[2026-06-12 20:01:36] [INFO] [MCP_SERVER] Executing pipeline: icat 521 | strings -el
+[2026-06-12 20:01:36] [SUCCESS] [MCP_SERVER] Hive carve clean.
+[2026-06-12 20:01:36] [INFO] [ORCHESTRATOR] Dynamic deep carve completed.
+[2026-06-12 20:01:36] [INFO] [ORCHESTRATOR] Feeding carve results back to LLM for final verdict.
+[2026-06-12 20:01:40] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:01:47] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 81940 (In: 81333, Out: 607)
+[2026-06-12 20:01:47] [INFO] [ORCHESTRATOR] Final LLM Verdict for registry_hive 'NTUSER Hive (/Users/informant/NTUSER.DAT)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:01:47] [WARN] [ORCHESTRATOR] EVALUATING REGISTRY_HIVE: NTUSER Hive (/Users/temporary/NTUSER.DAT)
+[2026-06-12 20:01:51] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:01:57] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 86531 (In: 85988, Out: 543)
+[2026-06-12 20:01:57] [INFO] [ORCHESTRATOR] LLM Verdict for registry_hive 'NTUSER Hive (/Users/temporary/NTUSER.DAT)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:01:57] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact meets the evaluation criteria for PERSISTENCE_001, but the false positive disproval check is inconclusive pending a deep carve of the registry hive.
+[2026-06-12 20:01:57] [INFO] [ORCHESTRATOR] Rule Applied: PERSISTENCE_001
+[2026-06-12 20:01:57] [INFO] [ORCHESTRATOR] LLM requested dynamic deep carve for indicators.
+[2026-06-12 20:01:57] [INFO] [MCP_SERVER] Starting Physical Hive Extraction (Inode: 64940)
+[2026-06-12 20:01:57] [INFO] [MCP_SERVER] Validating path security for: /media/angelo/kali-external/home/angelo/Desktop/pm_cfreds_evidence/cfreds_2015_data_leakage_pc.dd
+[2026-06-12 20:01:57] [SUCCESS] [MCP_SERVER] Path validated securely: /media/angelo/kali-external/home/angelo/Desktop/pm_cfreds_evidence/cfreds_2015_data_leakage_pc.dd
+[2026-06-12 20:01:57] [INFO] [MCP_SERVER] Executing pipeline: icat 64940 | strings -el
+[2026-06-12 20:01:57] [SUCCESS] [MCP_SERVER] Hive carve clean.
+[2026-06-12 20:01:57] [INFO] [ORCHESTRATOR] Dynamic deep carve completed.
+[2026-06-12 20:01:57] [INFO] [ORCHESTRATOR] Feeding carve results back to LLM for final verdict.
+[2026-06-12 20:02:01] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:02:07] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 87224 (In: 86617, Out: 607)
+[2026-06-12 20:02:07] [INFO] [ORCHESTRATOR] Final LLM Verdict for registry_hive 'NTUSER Hive (/Users/temporary/NTUSER.DAT)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:02:07] [SUCCESS] [ORCHESTRATOR] All suspect entities analyzed. Processing final exhaustive report.
+[2026-06-12 20:02:07] [INFO] [ORCHESTRATOR] Initiating Exhaustive MITRE ATT&CK Report Generation...
+[2026-06-12 20:02:07] [INFO] [AGENT] Synthesizing executive report from isolated threats...
+[2026-06-12 20:02:14] [INFO] [AGENT] Synthesis Tokens: 2107 (In: 1543, Out: 564)
+[2026-06-12 20:02:14] [SUCCESS] [ORCHESTRATOR] Executive Synthesis and Dynamic Recommendations appended successfully.
+[2026-06-12 20:02:14] [SUCCESS] [ORCHESTRATOR] Report forged at: /mnt/sift_ext4/sift_home/projects/project_mantis_github/agent_v0.5.2_stable-hackathon/PM_MITRE_Report_20260612_200207.md
+[2026-06-12 20:02:14] [INFO] [ORCHESTRATOR] Document Integrity Hash (SHA-256): 9c76ffa065a30f99f70daca6e5e8226df51527fc7b17cba8ec5d911929f3a164
+[2026-06-12 20:03:47] [SUCCESS] [ORCHESTRATOR] Cache context verified.
+[2026-06-12 20:03:47] [INFO] [AGENT] Initializing MantisAgent with provider: VERTEX
+[2026-06-12 20:03:47] [INFO] [AGENT] System instructions loaded successfully.
+[2026-06-12 20:03:47] [INFO] [AGENT] Creating generative API session with JSON schema constraints.
+[2026-06-12 20:03:47] [INFO] [ORCHESTRATOR] Auto-executing investigation pipeline...
+[2026-06-12 20:03:47] [INFO] [ORCHESTRATOR] Initializing Exhaustive Deterministic State Machine...
+[2026-06-12 20:03:47] [INFO] [MCP_SERVER] Executing get_evidence_context()
+[2026-06-12 20:03:47] [INFO] [MCP_SERVER] Context cache found.
+[2026-06-12 20:03:47] [INFO] [ORCHESTRATOR] Evidence Context Acquired.
+[2026-06-12 20:03:47] [INFO] [ORCHESTRATOR] SMPT Phase 1: Building multi-signal Entity index...
+[2026-06-12 20:03:51] [INFO] [ORCHESTRATOR] SMPT Phase 2: Running deterministic scoring...
+[2026-06-12 20:03:51] [SUCCESS] [ORCHESTRATOR] SMPT complete. Total=2750 | Critical=5 | High=2551 | Cleared=194
+[2026-06-12 20:03:51] [INFO] [ORCHESTRATOR] SMPT Phase 3: Selected 27 Entities for LLM.
+[2026-06-12 20:03:51] [INFO] [ORCHESTRATOR] Proceeding to iterate 27 highly-suspect Entities deterministically.
+[2026-06-12 20:03:51] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 8312 (SearchApp.exe)
+[2026-06-12 20:03:51] [INFO] [ORCHESTRATOR] Baseline Engine injected tags: ['SW_BASELINE_JIT:searchapp.exe', 'NET_BASELINE_CORPORATE:192.168.1.5', 'NET_BASELINE_RFC1918:192.168.1.5']
+[2026-06-12 20:03:51] [INFO] [ORCHESTRATOR] Deterministic Verdict for process 'PID 8312 (SearchApp.exe)': MALICIOUS
+[2026-06-12 20:03:51] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 8312 (SearchApp.exe)': MALICIOUS (Confidence: HIGH)
+[2026-06-12 20:03:51] [INFO] [ORCHESTRATOR] LLM Reasoning: [DETERMINISTIC] Process SearchApp.exe contains 1 allocation(s) with malicious trampoline patterns (movabs rax, addr; jmp rax). Per playbook PROC_INJ_001, this is process injection.
+[2026-06-12 20:03:51] [INFO] [ORCHESTRATOR] Rule Applied: PROC_INJ_001
+[2026-06-12 20:03:51] [SUCCESS] [ORCHESTRATOR] Deterministic MALICIOUS verdict. Bypassing Defense Attorney.
+[2026-06-12 20:03:51] [CRITICAL] [ORCHESTRATOR] THREAT ISOLATED: process 'PID 8312 (SearchApp.exe)' is MALICIOUS.
+[2026-06-12 20:03:51] [INFO] [ORCHESTRATOR] Committing finding to historical IOC store (atomic write).
+[2026-06-12 20:03:51] [SUCCESS] [ORCHESTRATOR] IOC Store commit successful.
+[2026-06-12 20:03:51] [INFO] [ORCHESTRATOR] Initiating Post-Conviction Disk Pivot Pipeline...
+[2026-06-12 20:03:51] [INFO] [MCP_SERVER] Executing search_disk_timeline(keyword='8312')
+[2026-06-12 20:03:51] [SUCCESS] [ORCHESTRATOR] Disk pivot found 200 timeline artifacts for PID 8312.
+[2026-06-12 20:03:51] [INFO] [AGENT] Creating generative API session for Disk-to-Memory Reconstruction.
+[2026-06-12 20:03:55] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:04:00] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 37601 (In: 37353, Out: 248)
+[2026-06-12 20:04:00] [SUCCESS] [ORCHESTRATOR] Execution Chain Reconstructed: UNKNOWN/CLEARED (Anti-Forensics suspected)
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] Committing finding to historical IOC store (atomic write).
+[2026-06-12 20:04:00] [SUCCESS] [ORCHESTRATOR] IOC Store commit successful.
+[2026-06-12 20:04:00] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 19348 (smartscreen.ex)
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] Baseline Engine injected tags: ['NET_BASELINE_RFC1918:0.0.0.0']
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] Deterministic Verdict for process 'PID 19348 (smartscreen.ex)': BENIGN
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 19348 (smartscreen.ex)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] LLM Reasoning: [DETERMINISTIC] Process smartscreen.ex contains only benign patterns: JIT padding and/or CFG checks. No malicious trampolines detected.
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] Rule Applied: PROC_INJ_001
+[2026-06-12 20:04:00] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 9788 (LockApp.exe)
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] Baseline Engine injected tags: ['SW_BASELINE_JIT:lockapp.exe']
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] Deterministic Verdict for process 'PID 9788 (LockApp.exe)': BENIGN
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 9788 (LockApp.exe)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] LLM Reasoning: [DETERMINISTIC] Process LockApp.exe contains only benign patterns: JIT padding and/or CFG checks. No malicious trampolines detected.
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] Rule Applied: PROC_INJ_001
+[2026-06-12 20:04:00] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 19436 (SearchApp.exe)
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] Baseline Engine injected tags: ['SW_BASELINE_JIT:searchapp.exe']
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] Deterministic Verdict for process 'PID 19436 (SearchApp.exe)': BENIGN
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 19436 (SearchApp.exe)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] LLM Reasoning: [DETERMINISTIC] Process SearchApp.exe contains only benign patterns: JIT padding and/or CFG checks. No malicious trampolines detected.
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] Rule Applied: PROC_INJ_001
+[2026-06-12 20:04:00] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 4864 (MsMpEng.exe)
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] Deterministic Verdict for process 'PID 4864 (MsMpEng.exe)': BENIGN
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 4864 (MsMpEng.exe)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] LLM Reasoning: [DETERMINISTIC] Process MsMpEng.exe contains only benign patterns: JIT padding and/or CFG checks. No malicious trampolines detected.
+[2026-06-12 20:04:00] [INFO] [ORCHESTRATOR] Rule Applied: PROC_INJ_001
+[2026-06-12 20:04:00] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/fredr/AppData/Local/Temp/Temp1_StarFury.zip ($FILE_NAME)
+[2026-06-12 20:04:04] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:04:07] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 7159 (In: 6524, Out: 635)
+[2026-06-12 20:04:07] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/fredr/AppData/Local/Temp/Temp1_StarFury.zip ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:04:07] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact meets the criteria for DATA_EXFIL_001, but the false positive disproval check is inconclusive due to lack of environmental context regarding the file's origin or purpose.
+[2026-06-12 20:04:07] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_001
+[2026-06-12 20:04:07] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/fredr/AppData/Local/Temp/Temp2_StarFury.zip ($FILE_NAME)
+[2026-06-12 20:04:11] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:04:15] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 11976 (In: 11346, Out: 630)
+[2026-06-12 20:04:15] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/fredr/AppData/Local/Temp/Temp2_StarFury.zip ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:04:15] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact meets the criteria for DATA_EXFIL_001, but the false positive disproval check is inconclusive due to lack of environmental context regarding the file's origin or purpose.
+[2026-06-12 20:04:15] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_001
+[2026-06-12 20:04:15] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/fredr/AppData/Local/Temp/Temp3_StarFury.zip ($FILE_NAME)
+[2026-06-12 20:04:19] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:04:23] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 16793 (In: 16163, Out: 630)
+[2026-06-12 20:04:23] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/fredr/AppData/Local/Temp/Temp3_StarFury.zip ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:04:23] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact meets the criteria for DATA_EXFIL_001, but the false positive disproval check is inconclusive due to lack of environmental context regarding the file's origin or purpose.
+[2026-06-12 20:04:23] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_001
+[2026-06-12 20:04:23] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/fredr/AppData/Roaming/Microsoft/Office/Recent/Minecraft.LNK ($FILE_NAME)
+[2026-06-12 20:04:27] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:04:31] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 21575 (In: 20980, Out: 595)
+[2026-06-12 20:04:31] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/fredr/AppData/Roaming/Microsoft/Office/Recent/Minecraft.LNK ($FILE_NAME)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:04:31] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact is a shortcut to a personal game, which is a benign personal file.
+[2026-06-12 20:04:31] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 20:04:31] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/fredr/AppData/Roaming/Microsoft/Office/Recent/Brony.LNK ($FILE_NAME)
+[2026-06-12 20:04:35] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:04:41] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 26370 (In: 25763, Out: 607)
+[2026-06-12 20:04:41] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/fredr/AppData/Roaming/Microsoft/Office/Recent/Brony.LNK ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:04:41] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact meets the criteria for DATA_EXFIL_002, but the false positive disproval check is inconclusive due to lack of target path information to confirm a benign destination.
+[2026-06-12 20:04:41] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 20:04:41] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/fredr/AppData/Roaming/Microsoft/Office/Recent/Firedam.LNK ($FILE_NAME)
+[2026-06-12 20:04:45] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:04:49] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 31181 (In: 30559, Out: 622)
+[2026-06-12 20:04:49] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/fredr/AppData/Roaming/Microsoft/Office/Recent/Firedam.LNK ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:04:49] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact meets the criteria for DATA_EXFIL_002, but the false positive disproval check is inconclusive due to lack of target path information to confirm a benign destination.
+[2026-06-12 20:04:49] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 20:04:49] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/fredr/AppData/Roaming/Microsoft/Office/Recent/GunStar Death Blossom Data.LNK ($FILE_NAME)
+[2026-06-12 20:04:53] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:04:58] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 35999 (In: 35373, Out: 626)
+[2026-06-12 20:04:58] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/fredr/AppData/Roaming/Microsoft/Office/Recent/GunStar Death Blossom Data.LNK ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:04:58] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact meets the criteria for DATA_EXFIL_002, but the false positive disproval check is inconclusive due to lack of target path information to confirm a benign destination.
+[2026-06-12 20:04:58] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 20:04:58] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/fredr/AppData/Roaming/Microsoft/Office/Recent/NETFLIX_10-K_20130201.LNK ($FILE_NAME)
+[2026-06-12 20:05:02] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:05:09] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 40848 (In: 40203, Out: 645)
+[2026-06-12 20:05:09] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/fredr/AppData/Roaming/Microsoft/Office/Recent/NETFLIX_10-K_20130201.LNK ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:05:09] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact meets the criteria for DATA_EXFIL_002, but the false positive disproval check is inconclusive due to lack of target path information to confirm a benign destination.
+[2026-06-12 20:05:09] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 20:05:09] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/fredr/AppData/Roaming/Microsoft/Office/Recent/Vibrainium(1).LNK ($FILE_NAME)
+[2026-06-12 20:05:13] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:05:18] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 45669 (In: 45041, Out: 628)
+[2026-06-12 20:05:18] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/fredr/AppData/Roaming/Microsoft/Office/Recent/Vibrainium(1).LNK ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:05:18] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact meets the criteria for DATA_EXFIL_002, but the false positive disproval check is inconclusive due to lack of target path information to confirm a benign destination.
+[2026-06-12 20:05:18] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 20:05:18] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/fredr/AppData/Roaming/Microsoft/Office/Recent/Wolf AIr Financials.LNK ($FILE_NAME)
+[2026-06-12 20:05:22] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:05:31] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 50487 (In: 49861, Out: 626)
+[2026-06-12 20:05:31] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/fredr/AppData/Roaming/Microsoft/Office/Recent/Wolf AIr Financials.LNK ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:05:31] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact meets the criteria for DATA_EXFIL_002, but the false positive disproval check is inconclusive due to lack of target path information to confirm a benign destination.
+[2026-06-12 20:05:31] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 20:05:31] [WARN] [ORCHESTRATOR] EVALUATING REGISTRY_HIVE: NTUSER Hive (/Users/fredr/NTUSER.DAT)
+[2026-06-12 20:05:35] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:05:40] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 55113 (In: 54526, Out: 587)
+[2026-06-12 20:05:40] [INFO] [ORCHESTRATOR] LLM Verdict for registry_hive 'NTUSER Hive (/Users/fredr/NTUSER.DAT)': SUSPICIOUS (Confidence: LOW)
+[2026-06-12 20:05:40] [INFO] [ORCHESTRATOR] LLM Reasoning: The registry hive exists, but no specific malicious persistence artifacts have been identified yet. Deep carving is required to confirm or disprove the presence of malicious autorun keys.
+[2026-06-12 20:05:40] [INFO] [ORCHESTRATOR] Rule Applied: PERSISTENCE_001
+[2026-06-12 20:05:40] [INFO] [ORCHESTRATOR] LLM requested dynamic deep carve for indicators.
+[2026-06-12 20:05:40] [INFO] [MCP_SERVER] Starting Physical Hive Extraction (Inode: 154911)
+[2026-06-12 20:05:40] [INFO] [MCP_SERVER] Validating path security for: /media/angelo/1EF60A44F60A1CA1/pm_rocba_evidence/rocba-cdrive.e01
+[2026-06-12 20:05:41] [SUCCESS] [MCP_SERVER] Path validated securely: /media/angelo/1EF60A44F60A1CA1/pm_rocba_evidence/rocba-cdrive.e01
+[2026-06-12 20:05:41] [INFO] [MCP_SERVER] Executing pipeline: icat 154911 | strings -el
+[2026-06-12 20:05:47] [WARN] [MCP_SERVER] Anomaly detected! 97 suspicious DLL paths found.
+[2026-06-12 20:05:47] [INFO] [ORCHESTRATOR] Dynamic deep carve completed.
+[2026-06-12 20:05:47] [INFO] [ORCHESTRATOR] Feeding carve results back to LLM for final verdict.
+[2026-06-12 20:05:51] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:05:56] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 56969 (In: 56274, Out: 695)
+[2026-06-12 20:05:56] [INFO] [ORCHESTRATOR] Final LLM Verdict for registry_hive 'NTUSER Hive (/Users/fredr/NTUSER.DAT)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:05:56] [WARN] [ORCHESTRATOR] EVALUATING REGISTRY_HIVE: NTUSER Hive (/Users/srl-h/NTUSER.DAT)
+[2026-06-12 20:06:00] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:06:04] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 61568 (In: 61010, Out: 558)
+[2026-06-12 20:06:04] [INFO] [ORCHESTRATOR] LLM Verdict for registry_hive 'NTUSER Hive (/Users/srl-h/NTUSER.DAT)': SUSPICIOUS (Confidence: LOW)
+[2026-06-12 20:06:04] [INFO] [ORCHESTRATOR] LLM Reasoning: The registry hive exists, but no specific malicious persistence artifacts have been identified yet. Deep carving is required to confirm or disprove the presence of malicious autorun keys.
+[2026-06-12 20:06:04] [INFO] [ORCHESTRATOR] Rule Applied: PERSISTENCE_001
+[2026-06-12 20:06:04] [INFO] [ORCHESTRATOR] LLM requested dynamic deep carve for indicators.
+[2026-06-12 20:06:04] [INFO] [MCP_SERVER] Starting Physical Hive Extraction (Inode: 154933)
+[2026-06-12 20:06:04] [INFO] [MCP_SERVER] Validating path security for: /media/angelo/1EF60A44F60A1CA1/pm_rocba_evidence/rocba-cdrive.e01
+[2026-06-12 20:06:04] [SUCCESS] [MCP_SERVER] Path validated securely: /media/angelo/1EF60A44F60A1CA1/pm_rocba_evidence/rocba-cdrive.e01
+[2026-06-12 20:06:04] [INFO] [MCP_SERVER] Executing pipeline: icat 154933 | strings -el
+[2026-06-12 20:06:05] [WARN] [MCP_SERVER] Anomaly detected! 3 suspicious DLL paths found.
+[2026-06-12 20:06:05] [INFO] [ORCHESTRATOR] Dynamic deep carve completed.
+[2026-06-12 20:06:05] [INFO] [ORCHESTRATOR] Feeding carve results back to LLM for final verdict.
+[2026-06-12 20:06:09] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:06:14] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 62399 (In: 61751, Out: 648)
+[2026-06-12 20:06:14] [INFO] [ORCHESTRATOR] Final LLM Verdict for registry_hive 'NTUSER Hive (/Users/srl-h/NTUSER.DAT)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:06:14] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 440 (smss.exe)
+[2026-06-12 20:06:18] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:06:23] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 67250 (In: 66652, Out: 598)
+[2026-06-12 20:06:23] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 440 (smss.exe)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:06:23] [INFO] [ORCHESTRATOR] LLM Reasoning: The process 'smss.exe' is a legitimate system process located in the expected system directory. The masquerading signal is a false positive.
+[2026-06-12 20:06:23] [INFO] [ORCHESTRATOR] Rule Applied: PROC_MASQ_001
+[2026-06-12 20:06:23] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 2676 (MemCompression)
+[2026-06-12 20:06:27] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:06:32] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 72019 (In: 71467, Out: 552)
+[2026-06-12 20:06:32] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 2676 (MemCompression)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:06:32] [INFO] [ORCHESTRATOR] LLM Reasoning: MemCompression is a standard Windows system process. The signals flagged are artifacts of its nature as a kernel-level process.
+[2026-06-12 20:06:32] [INFO] [ORCHESTRATOR] Rule Applied: PROC_MASQ_001
+[2026-06-12 20:06:32] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 30216 (svchost.exe)
+[2026-06-12 20:06:36] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:06:40] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 76830 (In: 76249, Out: 581)
+[2026-06-12 20:06:40] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 30216 (svchost.exe)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:06:40] [INFO] [ORCHESTRATOR] LLM Reasoning: The process 'svchost.exe' is a legitimate system process. The masquerading signal is a false positive.
+[2026-06-12 20:06:40] [INFO] [ORCHESTRATOR] Rule Applied: PROC_MASQ_001
+[2026-06-12 20:06:40] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 9836 (svchost.exe)
+[2026-06-12 20:06:44] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:06:49] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 81644 (In: 81083, Out: 561)
+[2026-06-12 20:06:49] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 9836 (svchost.exe)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:06:49] [INFO] [ORCHESTRATOR] LLM Reasoning: The process 'svchost.exe' is a legitimate system process. The masquerading signal is a false positive.
+[2026-06-12 20:06:49] [INFO] [ORCHESTRATOR] Rule Applied: PROC_MASQ_001
+[2026-06-12 20:06:49] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 8872 (SearchIndexer.)
+[2026-06-12 20:06:53] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:06:57] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 86482 (In: 85902, Out: 580)
+[2026-06-12 20:06:57] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 8872 (SearchIndexer.)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:06:57] [INFO] [ORCHESTRATOR] LLM Reasoning: The process is a truncated version of the legitimate SearchIndexer.exe system process. The masquerading signal is a false positive due to kernel-level name truncation.
+[2026-06-12 20:06:57] [INFO] [ORCHESTRATOR] Rule Applied: PROC_MASQ_001
+[2026-06-12 20:06:57] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 29664 (SearchProtocol)
+[2026-06-12 20:07:01] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:07:06] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 91291 (In: 90727, Out: 564)
+[2026-06-12 20:07:06] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 29664 (SearchProtocol)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:07:06] [INFO] [ORCHESTRATOR] LLM Reasoning: The process is a truncated version of the legitimate SearchProtocolHost.exe system process. The signals flagged are false positives due to kernel-level name truncation.
+[2026-06-12 20:07:06] [INFO] [ORCHESTRATOR] Rule Applied: PROC_MASQ_001
+[2026-06-12 20:07:06] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 30328 (SearchFilterHo)
+[2026-06-12 20:07:10] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:07:14] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 96118 (In: 95538, Out: 580)
+[2026-06-12 20:07:14] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 30328 (SearchFilterHo)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:07:14] [INFO] [ORCHESTRATOR] LLM Reasoning: The process is a truncated version of the legitimate SearchFilterHost.exe system process. The signals flagged are false positives due to kernel-level name truncation.
+[2026-06-12 20:07:14] [INFO] [ORCHESTRATOR] Rule Applied: PROC_MASQ_001
+[2026-06-12 20:07:14] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 28864 (svchost.exe)
+[2026-06-12 20:07:18] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:07:23] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 100909 (In: 100348, Out: 561)
+[2026-06-12 20:07:23] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 28864 (svchost.exe)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:07:23] [INFO] [ORCHESTRATOR] LLM Reasoning: The process 'svchost.exe' is a legitimate system process. The masquerading signal is a false positive.
+[2026-06-12 20:07:23] [INFO] [ORCHESTRATOR] Rule Applied: PROC_MASQ_001
+[2026-06-12 20:07:23] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 7404 (userinit.exe)
+[2026-06-12 20:07:23] [INFO] [ORCHESTRATOR] Baseline Engine injected tags: ['SW_BASELINE_JIT:chrome.exe']
+[2026-06-12 20:07:27] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:07:33] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 114993 (In: 114414, Out: 579)
+[2026-06-12 20:07:33] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 7404 (userinit.exe)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:07:33] [INFO] [ORCHESTRATOR] LLM Reasoning: The process 'userinit.exe' is a legitimate system process. The signals flagged are false positives.
+[2026-06-12 20:07:33] [INFO] [ORCHESTRATOR] Rule Applied: PROC_MASQ_001
+[2026-06-12 20:07:33] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 12040 (crashpad_handl)
+[2026-06-12 20:07:37] [INFO] [ORCHESTRATOR] Querying VERTEX (gemini-3.1-flash-lite) Classifier (Pydantic enforced)...
+[2026-06-12 20:07:42] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 119850 (In: 119250, Out: 600)
+[2026-06-12 20:07:42] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 12040 (crashpad_handl)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:07:42] [INFO] [ORCHESTRATOR] LLM Reasoning: The process is a truncated version of the legitimate crashpad_handler.exe component of Google Drive File Stream. The signals flagged are false positives due to kernel-level name truncation.
+[2026-06-12 20:07:42] [INFO] [ORCHESTRATOR] Rule Applied: PROC_MASQ_001
+[2026-06-12 20:07:42] [SUCCESS] [ORCHESTRATOR] All suspect entities analyzed. Processing final exhaustive report.
+[2026-06-12 20:07:42] [INFO] [ORCHESTRATOR] Initiating Exhaustive MITRE ATT&CK Report Generation...
+[2026-06-12 20:07:42] [INFO] [AGENT] Synthesizing executive report from isolated threats...
+[2026-06-12 20:07:47] [INFO] [AGENT] Synthesis Tokens: 5447 (In: 4887, Out: 560)
+[2026-06-12 20:07:47] [SUCCESS] [ORCHESTRATOR] Executive Synthesis and Dynamic Recommendations appended successfully.
+[2026-06-12 20:07:47] [SUCCESS] [ORCHESTRATOR] Report forged at: /mnt/sift_ext4/sift_home/projects/project_mantis_github/agent_v0.5.2_stable-hackathon/PM_MITRE_Report_20260612_200742.md
+[2026-06-12 20:07:47] [INFO] [ORCHESTRATOR] Document Integrity Hash (SHA-256): 6d4ffcf607ac25da6211da114c6c95cb34bb3e4136e0f2fabe2340685eb02ca7

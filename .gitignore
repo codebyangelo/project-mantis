@@ -1,0 +1,48 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Mantis Artifacts & Logs
+execution.log
+thoughts.txt
+PM_MITRE_Report_*.md
+
+# Mantis Caching
+orchestrator_cache.json
+ioc_store.json
+evidence_cache/
+*cache.json
+
+# Environment files
+.env
+.DS_Store
+
+# Scratch files
+*.txt
+*.dd
+*.raw
+*.e01
+*.sh
+
+# --- ROOT LEVEL WHITELISTING ---
+# Ignore everything in the root by default
+/*
+
+# Explicitly allow the version directories
+!agent_v*/
+
+# Explicitly allow necessary root files
+!requirements.txt
+!.gitignore
+!README.md
+!LICENSE
+
+# --- HACKATHON EXCEPTIONS ---
+# Allow the execution and thoughts logs for v0.5.2 so judges can review them
+!agent_v0.5.2_stable-hackathon/execution.log
+!agent_v0.5.2_stable-hackathon/thoughts.txt
+
+# Allow the Nvidia test logs to prove the Agnostic Provider architecture works
+!agent_v0.5.2_nvidia(test_only)/execution.log
+!agent_v0.5.2_nvidia(test_only)/thoughts.txt

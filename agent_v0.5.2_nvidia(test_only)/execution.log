@@ -1,0 +1,324 @@
+[2026-06-11 16:44:07] [SUCCESS] [ORCHESTRATOR] Cache context verified.
+[2026-06-11 16:44:07] [INFO] [AGENT] Initializing MantisAgent with provider: NVIDIA
+[2026-06-11 16:44:07] [INFO] [AGENT] System instructions loaded successfully.
+[2026-06-11 16:44:07] [INFO] [AGENT] Creating generative API session with JSON schema constraints.
+[2026-06-11 16:44:07] [INFO] [ORCHESTRATOR] Auto-executing investigation pipeline...
+[2026-06-11 16:44:07] [INFO] [ORCHESTRATOR] Initializing Exhaustive Deterministic State Machine...
+[2026-06-11 16:44:07] [INFO] [MCP_SERVER] Executing get_evidence_context()
+[2026-06-11 16:44:07] [INFO] [MCP_SERVER] Context cache found.
+[2026-06-11 16:44:07] [INFO] [ORCHESTRATOR] Evidence Context Acquired.
+[2026-06-11 16:44:07] [INFO] [ORCHESTRATOR] SMPT Phase 1: Building multi-signal Entity index...
+[2026-06-11 16:44:08] [INFO] [ORCHESTRATOR] SMPT Phase 2: Running deterministic scoring...
+[2026-06-11 16:44:08] [SUCCESS] [ORCHESTRATOR] SMPT complete. Total=128 | Critical=0 | High=128 | Cleared=0
+[2026-06-11 16:44:08] [INFO] [ORCHESTRATOR] SMPT Phase 3: Selected 17 Entities for LLM.
+[2026-06-11 16:44:08] [INFO] [ORCHESTRATOR] Proceeding to iterate 17 highly-suspect Entities deterministically.
+[2026-06-11 16:44:08] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/inf.lnk ($FILE_NAME)
+[2026-06-11 16:44:12] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-11 16:44:58] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 5086 (In: 4262, Out: 824)
+[2026-06-11 16:44:58] [ERROR] [ORCHESTRATOR] HARD GROUNDING LAYER TRIGGERED: LLM citation 'path: /Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/inf.lnk ($FILE_NAME), signals: [SIG_DATA_LEAKAGE_INDICATOR]' not exact match. Forcing SUSPICIOUS.
+[2026-06-11 16:44:58] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/inf.lnk ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-11 16:44:58] [INFO] [ORCHESTRATOR] LLM Reasoning: FORCED SUSPICIOUS due to Hard Grounding Layer violation. Citation not in evidence.
+[2026-06-11 16:44:58] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-11 16:44:58] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/setupapi.dev.lnk ($FILE_NAME)
+[2026-06-11 16:45:02] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-11 16:45:50] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 9011 (In: 8274, Out: 737)
+[2026-06-11 16:45:50] [ERROR] [ORCHESTRATOR] HARD GROUNDING LAYER TRIGGERED: LLM citation 'path: /Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/setupapi.dev.lnk ($FILE_NAME), signals: [SIG_DATA_LEAKAGE_INDICATOR]' not exact match. Forcing SUSPICIOUS.
+[2026-06-11 16:45:50] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/setupapi.dev.lnk ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-11 16:45:50] [INFO] [ORCHESTRATOR] LLM Reasoning: FORCED SUSPICIOUS due to Hard Grounding Layer violation. Citation not in evidence.
+[2026-06-11 16:45:50] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-11 16:45:50] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Office/Recent/(secret_project)_pricing_decision.xlsx.LNK ($FILE_NAME)
+[2026-06-11 16:45:50] [INFO] [ORCHESTRATOR] Baseline Engine injected tags: ['NET_BASELINE_CORPORATE:10.11.11.128', 'NET_BASELINE_RFC1918:10.11.11.128']
+[2026-06-11 16:45:54] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-11 16:48:46] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 13156 (In: 12404, Out: 752)
+[2026-06-11 16:48:46] [ERROR] [ORCHESTRATOR] HARD GROUNDING LAYER TRIGGERED: LLM citation 'path: /Users/informant/AppData/Roaming/Microsoft/Office/Recent/(PROJECT_ALPHA)_pricing_decision.xlsx.LNK ($FILE_NAME), signals: [SIG_DATA_LEAKAGE_INDICATOR]' not exact match. Forcing SUSPICIOUS.
+[2026-06-11 16:48:46] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/informant/AppData/Roaming/Microsoft/Office/Recent/(secret_project)_pricing_decision.xlsx.LNK ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-11 16:48:46] [INFO] [ORCHESTRATOR] LLM Reasoning: FORCED SUSPICIOUS due to Hard Grounding Layer violation. Citation not in evidence.
+[2026-06-11 16:48:46] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-11 16:48:46] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Office/Recent/Desktop.LNK ($FILE_NAME)
+[2026-06-11 16:48:50] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-11 16:49:37] [WARN] [ORCHESTRATOR] Investigation cleanly aborted by user.
+[2026-06-11 16:56:08] [SUCCESS] [ORCHESTRATOR] Cache context verified.
+[2026-06-11 16:56:08] [INFO] [AGENT] Initializing MantisAgent with provider: NVIDIA
+[2026-06-11 16:56:09] [INFO] [AGENT] System instructions loaded successfully.
+[2026-06-11 16:56:09] [INFO] [AGENT] Creating generative API session with JSON schema constraints.
+[2026-06-11 16:56:09] [INFO] [ORCHESTRATOR] Auto-executing investigation pipeline...
+[2026-06-11 16:56:09] [INFO] [ORCHESTRATOR] Initializing Exhaustive Deterministic State Machine...
+[2026-06-11 16:56:09] [INFO] [MCP_SERVER] Executing get_evidence_context()
+[2026-06-11 16:56:09] [INFO] [MCP_SERVER] Context cache found.
+[2026-06-11 16:56:09] [INFO] [ORCHESTRATOR] Evidence Context Acquired.
+[2026-06-11 16:56:09] [INFO] [ORCHESTRATOR] SMPT Phase 1: Building multi-signal Entity index...
+[2026-06-11 16:56:09] [INFO] [ORCHESTRATOR] SMPT Phase 2: Running deterministic scoring...
+[2026-06-11 16:56:09] [SUCCESS] [ORCHESTRATOR] SMPT complete. Total=128 | Critical=0 | High=128 | Cleared=0
+[2026-06-11 16:56:09] [INFO] [ORCHESTRATOR] SMPT Phase 3: Selected 17 Entities for LLM.
+[2026-06-11 16:56:09] [INFO] [ORCHESTRATOR] Proceeding to iterate 17 highly-suspect Entities deterministically.
+[2026-06-11 16:56:09] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/inf.lnk ($FILE_NAME)
+[2026-06-11 16:56:13] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-11 16:57:29] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 4995 (In: 4262, Out: 733)
+[2026-06-11 16:57:29] [ERROR] [ORCHESTRATOR] HARD GROUNDING LAYER TRIGGERED: LLM citation 'path: /Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/inf.lnk ($FILE_NAME), signals: [SIG_DATA_LEAKAGE_INDICATOR]' not exact match. Forcing SUSPICIOUS.
+[2026-06-11 16:57:29] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/inf.lnk ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-11 16:57:29] [INFO] [ORCHESTRATOR] LLM Reasoning: FORCED SUSPICIOUS due to Hard Grounding Layer violation. Citation not in evidence.
+[2026-06-11 16:57:29] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-11 16:57:29] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/setupapi.dev.lnk ($FILE_NAME)
+[2026-06-11 16:57:33] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-11 16:58:22] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 8841 (In: 8189, Out: 652)
+[2026-06-11 16:58:22] [ERROR] [ORCHESTRATOR] HARD GROUNDING LAYER TRIGGERED: LLM citation 'path: /Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/setupapi.dev.lnk ($FILE_NAME), signals: [SIG_DATA_LEAKAGE_INDICATOR]' not exact match. Forcing SUSPICIOUS.
+[2026-06-11 16:58:22] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/setupapi.dev.lnk ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-11 16:58:22] [INFO] [ORCHESTRATOR] LLM Reasoning: FORCED SUSPICIOUS due to Hard Grounding Layer violation. Citation not in evidence.
+[2026-06-11 16:58:22] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-11 16:58:22] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Office/Recent/(secret_project)_pricing_decision.xlsx.LNK ($FILE_NAME)
+[2026-06-11 16:58:22] [INFO] [ORCHESTRATOR] Baseline Engine injected tags: ['NET_BASELINE_CORPORATE:10.11.11.128', 'NET_BASELINE_RFC1918:10.11.11.128']
+[2026-06-11 16:58:26] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-11 16:58:37] [WARN] [ORCHESTRATOR] Investigation cleanly aborted by user.
+[2026-06-12 19:02:29] [SUCCESS] [ORCHESTRATOR] Cache context verified.
+[2026-06-12 19:02:29] [INFO] [AGENT] Initializing MantisAgent with provider: NVIDIA
+[2026-06-12 19:02:31] [INFO] [AGENT] System instructions loaded successfully.
+[2026-06-12 19:02:31] [INFO] [AGENT] Creating generative API session with JSON schema constraints.
+[2026-06-12 19:02:31] [INFO] [ORCHESTRATOR] Auto-executing investigation pipeline...
+[2026-06-12 19:02:31] [INFO] [ORCHESTRATOR] Initializing Exhaustive Deterministic State Machine...
+[2026-06-12 19:02:31] [INFO] [MCP_SERVER] Executing get_evidence_context()
+[2026-06-12 19:02:31] [INFO] [MCP_SERVER] Context cache found.
+[2026-06-12 19:02:31] [INFO] [ORCHESTRATOR] Evidence Context Acquired.
+[2026-06-12 19:02:31] [INFO] [ORCHESTRATOR] SMPT Phase 1: Building multi-signal Entity index...
+[2026-06-12 19:02:32] [INFO] [ORCHESTRATOR] SMPT Phase 2: Running deterministic scoring...
+[2026-06-12 19:02:32] [SUCCESS] [ORCHESTRATOR] SMPT complete. Total=128 | Critical=0 | High=128 | Cleared=0
+[2026-06-12 19:02:32] [INFO] [ORCHESTRATOR] SMPT Phase 3: Selected 17 Entities for LLM.
+[2026-06-12 19:02:32] [INFO] [ORCHESTRATOR] Proceeding to iterate 17 highly-suspect Entities deterministically.
+[2026-06-12 19:02:32] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/inf.lnk ($FILE_NAME)
+[2026-06-12 19:02:36] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 19:03:16] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 4967 (In: 4262, Out: 705)
+[2026-06-12 19:03:16] [ERROR] [ORCHESTRATOR] HARD GROUNDING LAYER TRIGGERED: LLM citation 'Artifact path: /Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/inf.lnk ($FILE_NAME), Artifact signals: SIG_DATA_LEAKAGE_INDICATOR' not exact match. Forcing SUSPICIOUS.
+[2026-06-12 19:03:16] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/inf.lnk ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 19:03:16] [INFO] [ORCHESTRATOR] LLM Reasoning: FORCED SUSPICIOUS due to Hard Grounding Layer violation. Citation not in evidence.
+[2026-06-12 19:03:16] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 19:03:16] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/setupapi.dev.lnk ($FILE_NAME)
+[2026-06-12 19:03:20] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 19:05:53] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 8915 (In: 8226, Out: 689)
+[2026-06-12 19:05:53] [ERROR] [ORCHESTRATOR] HARD GROUNDING LAYER TRIGGERED: LLM citation 'Artifact path: /Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/setupapi.dev.lnk ($FILE_NAME), Artifact signals: SIG_DATA_LEAKAGE_INDICATOR' not exact match. Forcing SUSPICIOUS.
+[2026-06-12 19:05:53] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/setupapi.dev.lnk ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 19:05:53] [INFO] [ORCHESTRATOR] LLM Reasoning: FORCED SUSPICIOUS due to Hard Grounding Layer violation. Citation not in evidence.
+[2026-06-12 19:05:53] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 19:05:53] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Office/Recent/(secret_project)_pricing_decision.xlsx.LNK ($FILE_NAME)
+[2026-06-12 19:05:53] [INFO] [ORCHESTRATOR] Baseline Engine injected tags: ['NET_BASELINE_RFC1918:10.11.11.128', 'NET_BASELINE_CORPORATE:10.11.11.128']
+[2026-06-12 19:05:57] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 19:06:28] [WARN] [ORCHESTRATOR] Investigation cleanly aborted by user.
+[2026-06-12 20:17:08] [SUCCESS] [ORCHESTRATOR] Cache context verified.
+[2026-06-12 20:17:08] [INFO] [AGENT] Initializing MantisAgent with provider: NVIDIA
+[2026-06-12 20:17:09] [INFO] [AGENT] System instructions loaded successfully.
+[2026-06-12 20:17:09] [INFO] [AGENT] Creating generative API session with JSON schema constraints.
+[2026-06-12 20:17:09] [INFO] [ORCHESTRATOR] Auto-executing investigation pipeline...
+[2026-06-12 20:17:09] [INFO] [ORCHESTRATOR] Initializing Exhaustive Deterministic State Machine...
+[2026-06-12 20:17:09] [INFO] [MCP_SERVER] Executing get_evidence_context()
+[2026-06-12 20:17:09] [INFO] [MCP_SERVER] Context cache found.
+[2026-06-12 20:17:09] [INFO] [ORCHESTRATOR] Evidence Context Acquired.
+[2026-06-12 20:17:09] [INFO] [ORCHESTRATOR] SMPT Phase 1: Building multi-signal Entity index...
+[2026-06-12 20:17:13] [INFO] [ORCHESTRATOR] SMPT Phase 2: Running deterministic scoring...
+[2026-06-12 20:17:13] [SUCCESS] [ORCHESTRATOR] SMPT complete. Total=2750 | Critical=5 | High=2551 | Cleared=194
+[2026-06-12 20:17:13] [INFO] [ORCHESTRATOR] SMPT Phase 3: Selected 27 Entities for LLM.
+[2026-06-12 20:17:13] [INFO] [ORCHESTRATOR] Proceeding to iterate 27 highly-suspect Entities deterministically.
+[2026-06-12 20:17:13] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 8312 (SearchApp.exe)
+[2026-06-12 20:17:13] [INFO] [ORCHESTRATOR] Baseline Engine injected tags: ['SW_BASELINE_JIT:searchapp.exe', 'NET_BASELINE_CORPORATE:192.168.1.5', 'NET_BASELINE_RFC1918:192.168.1.5']
+[2026-06-12 20:17:13] [INFO] [ORCHESTRATOR] Deterministic Verdict for process 'PID 8312 (SearchApp.exe)': MALICIOUS
+[2026-06-12 20:17:13] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 8312 (SearchApp.exe)': MALICIOUS (Confidence: HIGH)
+[2026-06-12 20:17:13] [INFO] [ORCHESTRATOR] LLM Reasoning: [DETERMINISTIC] Process SearchApp.exe contains 1 allocation(s) with malicious trampoline patterns (movabs rax, addr; jmp rax). Per playbook PROC_INJ_001, this is process injection.
+[2026-06-12 20:17:13] [INFO] [ORCHESTRATOR] Rule Applied: PROC_INJ_001
+[2026-06-12 20:17:13] [SUCCESS] [ORCHESTRATOR] Deterministic MALICIOUS verdict. Bypassing Defense Attorney.
+[2026-06-12 20:17:13] [CRITICAL] [ORCHESTRATOR] THREAT ISOLATED: process 'PID 8312 (SearchApp.exe)' is MALICIOUS.
+[2026-06-12 20:17:13] [INFO] [ORCHESTRATOR] Committing finding to historical IOC store (atomic write).
+[2026-06-12 20:17:13] [SUCCESS] [ORCHESTRATOR] IOC Store commit successful.
+[2026-06-12 20:17:13] [INFO] [ORCHESTRATOR] Initiating Post-Conviction Disk Pivot Pipeline...
+[2026-06-12 20:17:13] [INFO] [MCP_SERVER] Executing search_disk_timeline(keyword='8312')
+[2026-06-12 20:17:13] [SUCCESS] [ORCHESTRATOR] Disk pivot found 200 timeline artifacts for PID 8312.
+[2026-06-12 20:17:13] [INFO] [AGENT] Creating generative API session for Disk-to-Memory Reconstruction.
+[2026-06-12 20:17:17] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:18:04] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 24448 (In: 24390, Out: 58)
+[2026-06-12 20:18:04] [SUCCESS] [ORCHESTRATOR] Execution Chain Reconstructed: UNKNOWN/CLEARED (Anti-Forensics suspected)
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] Committing finding to historical IOC store (atomic write).
+[2026-06-12 20:18:04] [SUCCESS] [ORCHESTRATOR] IOC Store commit successful.
+[2026-06-12 20:18:04] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 19348 (smartscreen.ex)
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] Baseline Engine injected tags: ['NET_BASELINE_RFC1918:0.0.0.0']
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] Deterministic Verdict for process 'PID 19348 (smartscreen.ex)': BENIGN
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 19348 (smartscreen.ex)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] LLM Reasoning: [DETERMINISTIC] Process smartscreen.ex contains only benign patterns: JIT padding and/or CFG checks. No malicious trampolines detected.
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] Rule Applied: PROC_INJ_001
+[2026-06-12 20:18:04] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 9788 (LockApp.exe)
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] Baseline Engine injected tags: ['SW_BASELINE_JIT:lockapp.exe']
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] Deterministic Verdict for process 'PID 9788 (LockApp.exe)': BENIGN
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 9788 (LockApp.exe)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] LLM Reasoning: [DETERMINISTIC] Process LockApp.exe contains only benign patterns: JIT padding and/or CFG checks. No malicious trampolines detected.
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] Rule Applied: PROC_INJ_001
+[2026-06-12 20:18:04] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 19436 (SearchApp.exe)
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] Baseline Engine injected tags: ['SW_BASELINE_JIT:searchapp.exe']
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] Deterministic Verdict for process 'PID 19436 (SearchApp.exe)': BENIGN
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 19436 (SearchApp.exe)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] LLM Reasoning: [DETERMINISTIC] Process SearchApp.exe contains only benign patterns: JIT padding and/or CFG checks. No malicious trampolines detected.
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] Rule Applied: PROC_INJ_001
+[2026-06-12 20:18:04] [WARN] [ORCHESTRATOR] EVALUATING PROCESS: PID 4864 (MsMpEng.exe)
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] Deterministic Verdict for process 'PID 4864 (MsMpEng.exe)': BENIGN
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] LLM Verdict for process 'PID 4864 (MsMpEng.exe)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] LLM Reasoning: [DETERMINISTIC] Process MsMpEng.exe contains only benign patterns: JIT padding and/or CFG checks. No malicious trampolines detected.
+[2026-06-12 20:18:04] [INFO] [ORCHESTRATOR] Rule Applied: PROC_INJ_001
+[2026-06-12 20:18:04] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/fredr/AppData/Local/Temp/Temp1_StarFury.zip ($FILE_NAME)
+[2026-06-12 20:18:08] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:19:46] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 4952 (In: 4255, Out: 697)
+[2026-06-12 20:19:46] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/fredr/AppData/Local/Temp/Temp1_StarFury.zip ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:19:46] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact matches the conditions for rule DATA_EXFIL_001, but the false positive disproval check FP_004_KNOWN_BACKUP_OR_PERSONAL_FILE failed to disprove. Further investigation is required to determine the true nature of the artifact.
+[2026-06-12 20:19:46] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_001
+[2026-06-12 20:19:46] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/fredr/AppData/Local/Temp/Temp2_StarFury.zip ($FILE_NAME)
+[2026-06-12 20:19:50] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:23:04] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 8753 (In: 8139, Out: 614)
+[2026-06-12 20:23:04] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/fredr/AppData/Local/Temp/Temp2_StarFury.zip ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:23:04] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact matches the conditions for rule DATA_EXFIL_001, but the false positive disproval check FP_004_KNOWN_BACKUP_OR_PERSONAL_FILE failed to disprove. Further investigation is required to determine the true nature of the artifact.
+[2026-06-12 20:23:04] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_001
+[2026-06-12 20:23:04] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/fredr/AppData/Local/Temp/Temp3_StarFury.zip ($FILE_NAME)
+[2026-06-12 20:23:08] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:23:12] [WARN] [ORCHESTRATOR] Investigation cleanly aborted by user.
+[2026-06-12 20:23:37] [SUCCESS] [ORCHESTRATOR] Cache context verified.
+[2026-06-12 20:23:37] [INFO] [AGENT] Initializing MantisAgent with provider: NVIDIA
+[2026-06-12 20:23:38] [INFO] [AGENT] System instructions loaded successfully.
+[2026-06-12 20:23:38] [INFO] [AGENT] Creating generative API session with JSON schema constraints.
+[2026-06-12 20:23:38] [INFO] [ORCHESTRATOR] Auto-executing investigation pipeline...
+[2026-06-12 20:23:38] [INFO] [ORCHESTRATOR] Initializing Exhaustive Deterministic State Machine...
+[2026-06-12 20:23:38] [INFO] [MCP_SERVER] Executing get_evidence_context()
+[2026-06-12 20:23:38] [INFO] [MCP_SERVER] Context cache found.
+[2026-06-12 20:23:38] [INFO] [ORCHESTRATOR] Evidence Context Acquired.
+[2026-06-12 20:23:38] [INFO] [ORCHESTRATOR] SMPT Phase 1: Building multi-signal Entity index...
+[2026-06-12 20:23:40] [INFO] [ORCHESTRATOR] SMPT Phase 2: Running deterministic scoring...
+[2026-06-12 20:23:40] [SUCCESS] [ORCHESTRATOR] SMPT complete. Total=128 | Critical=0 | High=128 | Cleared=0
+[2026-06-12 20:23:40] [INFO] [ORCHESTRATOR] SMPT Phase 3: Selected 17 Entities for LLM.
+[2026-06-12 20:23:40] [INFO] [ORCHESTRATOR] Proceeding to iterate 17 highly-suspect Entities deterministically.
+[2026-06-12 20:23:40] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/inf.lnk ($FILE_NAME)
+[2026-06-12 20:23:44] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:25:22] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 4953 (In: 4262, Out: 691)
+[2026-06-12 20:25:22] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/inf.lnk ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:25:22] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact matches the rule DATA_EXFIL_002, but the false positive disproval check FP_005_LEGITIMATE_ACCESS_OR_PERSONAL_FILE is INCONCLUSIVE due to lack of information about the destination drive/folder.
+[2026-06-12 20:25:22] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 20:25:22] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/setupapi.dev.lnk ($FILE_NAME)
+[2026-06-12 20:25:26] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:25:57] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 8768 (In: 8153, Out: 615)
+[2026-06-12 20:25:57] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/admin11/AppData/Roaming/Microsoft/Windows/Recent/setupapi.dev.lnk ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:25:57] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact matches the rule DATA_EXFIL_002, but the false positive disproval check FP_005_LEGITIMATE_ACCESS_OR_PERSONAL_FILE is INCONCLUSIVE due to lack of information about the destination drive/folder.
+[2026-06-12 20:25:57] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 20:25:57] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Office/Recent/(secret_project)_pricing_decision.xlsx.LNK ($FILE_NAME)
+[2026-06-12 20:25:57] [INFO] [ORCHESTRATOR] Baseline Engine injected tags: ['NET_BASELINE_CORPORATE:10.11.11.128', 'NET_BASELINE_RFC1918:10.11.11.128']
+[2026-06-12 20:26:01] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:27:16] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 12850 (In: 12161, Out: 689)
+[2026-06-12 20:27:16] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/informant/AppData/Roaming/Microsoft/Office/Recent/(secret_project)_pricing_decision.xlsx.LNK ($FILE_NAME)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:27:16] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact matches the rule DATA_EXFIL_002, but the false positive disproval check FP_005_LEGITIMATE_ACCESS_OR_PERSONAL_FILE is DISPROVED due to the presence of a corporate network share in the destination path.
+[2026-06-12 20:27:16] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 20:27:16] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Office/Recent/Desktop.LNK ($FILE_NAME)
+[2026-06-12 20:27:20] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:29:39] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 16739 (In: 16127, Out: 612)
+[2026-06-12 20:29:39] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/informant/AppData/Roaming/Microsoft/Office/Recent/Desktop.LNK ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:29:39] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact matches the rule DATA_EXFIL_002, but the false positive disproval check FP_005_LEGITIMATE_ACCESS_OR_PERSONAL_FILE is INCONCLUSIVE due to lack of information about the destination drive/folder.
+[2026-06-12 20:29:39] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 20:29:39] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Office/Recent/Resignation_Letter_(Iaman_Informant).docx.LNK ($FILE_NAME)
+[2026-06-12 20:29:43] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:35:21] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 20779 (In: 20100, Out: 679)
+[2026-06-12 20:35:21] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/informant/AppData/Roaming/Microsoft/Office/Recent/Resignation_Letter_(Iaman_Informant).docx.LNK ($FILE_NAME)': BENIGN (Confidence: HIGH)
+[2026-06-12 20:35:21] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact matches the rule DATA_EXFIL_002, but the false positive disproval check FP_005_LEGITIMATE_ACCESS_OR_PERSONAL_FILE is DISPROVED due to the presence of a benign destination path.
+[2026-06-12 20:35:21] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 20:35:21] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Office/Recent/Templates.LNK ($FILE_NAME)
+[2026-06-12 20:35:25] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:37:47] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 24671 (In: 24057, Out: 614)
+[2026-06-12 20:37:47] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/informant/AppData/Roaming/Microsoft/Office/Recent/Templates.LNK ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:37:47] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact matches the rule DATA_EXFIL_002, but the false positive disproval check FP_005_LEGITIMATE_ACCESS_OR_PERSONAL_FILE is INCONCLUSIVE due to lack of information about the destination drive/folder.
+[2026-06-12 20:37:47] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 20:37:47] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Office/Recent/[secret_project]_design_concept.LNK ($FILE_NAME)
+[2026-06-12 20:37:51] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:38:48] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 28690 (In: 28008, Out: 682)
+[2026-06-12 20:38:48] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/informant/AppData/Roaming/Microsoft/Office/Recent/[secret_project]_design_concept.LNK ($FILE_NAME)': MALICIOUS (Confidence: HIGH)
+[2026-06-12 20:38:48] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact matches the rule DATA_EXFIL_002, and the false positive disproval check FP_005_LEGITIMATE_ACCESS_OR_PERSONAL_FILE is FAIL_TO_DISPROVE due to the presence of a removable media in the destination path.
+[2026-06-12 20:38:48] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 20:38:48] [WARN] [ORCHESTRATOR] Prosecutor ruled MALICIOUS. Invoking Defense Attorney...
+[2026-06-12 20:38:48] [INFO] [AGENT] Creating generative API session for Defense Attorney.
+[2026-06-12 20:38:52] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:39:03] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 4452 (In: 4230, Out: 222)
+[2026-06-12 20:39:03] [WARN] [ORCHESTRATOR] Defense Attorney FAILED TO DISPROVE the evidence.
+[2026-06-12 20:39:03] [INFO] [ORCHESTRATOR] Invoking Verifier LLM to audit the adversarial debate.
+[2026-06-12 20:39:03] [INFO] [AGENT] Creating generative API session for Verifier.
+[2026-06-12 20:39:07] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:39:31] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 1334 (In: 1195, Out: 139)
+[2026-06-12 20:39:31] [SUCCESS] [ORCHESTRATOR] VERIFIER PASSED the claims.
+[2026-06-12 20:39:31] [CRITICAL] [ORCHESTRATOR] THREAT ISOLATED: file '/Users/informant/AppData/Roaming/Microsoft/Office/Recent/[secret_project]_design_concept.LNK ($FILE_NAME)' is MALICIOUS.
+[2026-06-12 20:39:31] [INFO] [ORCHESTRATOR] Committing finding to historical IOC store (atomic write).
+[2026-06-12 20:39:31] [SUCCESS] [ORCHESTRATOR] IOC Store commit successful.
+[2026-06-12 20:39:31] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Office/Recent/[secret_project]_final_meeting.pptx.LNK ($FILE_NAME)
+[2026-06-12 20:39:35] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:41:05] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 32642 (In: 32010, Out: 632)
+[2026-06-12 20:41:05] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/informant/AppData/Roaming/Microsoft/Office/Recent/[secret_project]_final_meeting.pptx.LNK ($FILE_NAME)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:41:05] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact matches the rule DATA_EXFIL_002, but the false positive disproval check FP_005_LEGITIMATE_ACCESS_OR_PERSONAL_FILE is INCONCLUSIVE due to lack of information about the destination drive/folder.
+[2026-06-12 20:41:05] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 20:41:05] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Office/Recent/[secret_project]_proposal.LNK ($FILE_NAME)
+[2026-06-12 20:41:09] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:41:55] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 36649 (In: 35973, Out: 676)
+[2026-06-12 20:41:55] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/informant/AppData/Roaming/Microsoft/Office/Recent/[secret_project]_proposal.LNK ($FILE_NAME)': MALICIOUS (Confidence: HIGH)
+[2026-06-12 20:41:55] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact matches the rule DATA_EXFIL_002, and the false positive disproval check FP_005_LEGITIMATE_ACCESS_OR_PERSONAL_FILE is FAIL_TO_DISPROVE due to the presence of a removable media in the destination path.
+[2026-06-12 20:41:55] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 20:41:55] [WARN] [ORCHESTRATOR] Prosecutor ruled MALICIOUS. Invoking Defense Attorney...
+[2026-06-12 20:41:55] [INFO] [AGENT] Creating generative API session for Defense Attorney.
+[2026-06-12 20:41:59] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:42:18] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 4492 (In: 4218, Out: 274)
+[2026-06-12 20:42:18] [WARN] [ORCHESTRATOR] Defense Attorney FAILED TO DISPROVE the evidence.
+[2026-06-12 20:42:18] [INFO] [ORCHESTRATOR] Invoking Verifier LLM to audit the adversarial debate.
+[2026-06-12 20:42:18] [INFO] [AGENT] Creating generative API session for Verifier.
+[2026-06-12 20:42:22] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:42:33] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 1422 (In: 1234, Out: 188)
+[2026-06-12 20:42:33] [SUCCESS] [ORCHESTRATOR] VERIFIER PASSED the claims.
+[2026-06-12 20:42:33] [CRITICAL] [ORCHESTRATOR] THREAT ISOLATED: file '/Users/informant/AppData/Roaming/Microsoft/Office/Recent/[secret_project]_proposal.LNK ($FILE_NAME)' is MALICIOUS.
+[2026-06-12 20:42:33] [INFO] [ORCHESTRATOR] Committing finding to historical IOC store (atomic write).
+[2026-06-12 20:42:33] [SUCCESS] [ORCHESTRATOR] IOC Store commit successful.
+[2026-06-12 20:42:33] [WARN] [ORCHESTRATOR] EVALUATING FILE: /Users/informant/AppData/Roaming/Microsoft/Templates/LiveContent/15/Managed/Word Document Building Blocks/1033/TM02835270[[fn=Photo Sidebar (Annual Report Red and Black design)]].docx (deleted)
+[2026-06-12 20:42:37] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:44:36] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 40401 (In: 39915, Out: 486)
+[2026-06-12 20:44:36] [INFO] [ORCHESTRATOR] LLM Verdict for file '/Users/informant/AppData/Roaming/Microsoft/Templates/LiveContent/15/Managed/Word Document Building Blocks/1033/TM02835270[[fn=Photo Sidebar (Annual Report Red and Black design)]].docx (deleted)': BENIGN (Confidence: LOW)
+[2026-06-12 20:44:36] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact does not match the rule DATA_EXFIL_002 due to the lack of a .lnk file extension.
+[2026-06-12 20:44:36] [INFO] [ORCHESTRATOR] Rule Applied: DATA_EXFIL_002
+[2026-06-12 20:44:36] [WARN] [ORCHESTRATOR] EVALUATING EVENT_LOG: EVTX System.evtx ($FILE_NAME)
+[2026-06-12 20:44:41] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:45:44] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 43993 (In: 43603, Out: 390)
+[2026-06-12 20:45:44] [INFO] [ORCHESTRATOR] LLM Verdict for event_log 'EVTX System.evtx ($FILE_NAME)': BENIGN (Confidence: LOW)
+[2026-06-12 20:45:44] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact does not match the rule USB_LNK_001 due to the lack of a .lnk file extension.
+[2026-06-12 20:45:44] [INFO] [ORCHESTRATOR] Rule Applied: USB_LNK_001
+[2026-06-12 20:45:44] [WARN] [ORCHESTRATOR] EVALUATING EVENT_LOG: EVTX System.evtx
+[2026-06-12 20:45:48] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:46:21] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 47576 (In: 47192, Out: 384)
+[2026-06-12 20:46:21] [INFO] [ORCHESTRATOR] LLM Verdict for event_log 'EVTX System.evtx': BENIGN (Confidence: LOW)
+[2026-06-12 20:46:21] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact does not match the rule USB_LNK_001 due to the lack of a .lnk file extension.
+[2026-06-12 20:46:21] [INFO] [ORCHESTRATOR] Rule Applied: USB_LNK_001
+[2026-06-12 20:46:21] [WARN] [ORCHESTRATOR] EVALUATING REGISTRY_HIVE: SYSTEM Hive
+[2026-06-12 20:46:25] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:49:11] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 51273 (In: 50735, Out: 538)
+[2026-06-12 20:49:11] [INFO] [ORCHESTRATOR] LLM Verdict for registry_hive 'SYSTEM Hive': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:49:11] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact matches the rule USB_EXFIL_001, but the false positive disproval check FP_010_AUTHORIZED_USB is INCONCLUSIVE due to lack of information about the USB device.
+[2026-06-12 20:49:11] [INFO] [ORCHESTRATOR] Rule Applied: USB_EXFIL_001
+[2026-06-12 20:49:11] [WARN] [ORCHESTRATOR] EVALUATING REGISTRY_HIVE: SOFTWARE Hive
+[2026-06-12 20:49:15] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:49:42] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 54998 (In: 54432, Out: 566)
+[2026-06-12 20:49:42] [INFO] [ORCHESTRATOR] LLM Verdict for registry_hive 'SOFTWARE Hive': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:49:42] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact matches the rule PERSISTENCE_001, but the false positive disproval check FP_009_KNOWN_SOFTWARE is INCONCLUSIVE due to lack of information about the registry path.
+[2026-06-12 20:49:42] [INFO] [ORCHESTRATOR] Rule Applied: PERSISTENCE_001
+[2026-06-12 20:49:42] [WARN] [ORCHESTRATOR] EVALUATING REGISTRY_HIVE: NTUSER Hive (/Users/admin11/NTUSER.DAT)
+[2026-06-12 20:49:46] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:50:47] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 58783 (In: 58171, Out: 612)
+[2026-06-12 20:50:47] [INFO] [ORCHESTRATOR] LLM Verdict for registry_hive 'NTUSER Hive (/Users/admin11/NTUSER.DAT)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:50:47] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact matches the rule PERSISTENCE_001, but the false positive disproval check FP_009_KNOWN_SOFTWARE is INCONCLUSIVE due to lack of information about the registry path.
+[2026-06-12 20:50:47] [INFO] [ORCHESTRATOR] Rule Applied: PERSISTENCE_001
+[2026-06-12 20:50:47] [WARN] [ORCHESTRATOR] EVALUATING REGISTRY_HIVE: NTUSER Hive (/Users/informant/NTUSER.DAT)
+[2026-06-12 20:50:51] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 20:52:05] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 62570 (In: 61956, Out: 614)
+[2026-06-12 20:52:05] [INFO] [ORCHESTRATOR] LLM Verdict for registry_hive 'NTUSER Hive (/Users/informant/NTUSER.DAT)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 20:52:05] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact matches the rule PERSISTENCE_001, but the false positive disproval check FP_009_KNOWN_SOFTWARE is INCONCLUSIVE due to lack of information about the registry path.
+[2026-06-12 20:52:05] [INFO] [ORCHESTRATOR] Rule Applied: PERSISTENCE_001
+[2026-06-12 20:52:05] [WARN] [ORCHESTRATOR] EVALUATING REGISTRY_HIVE: NTUSER Hive (/Users/temporary/NTUSER.DAT)
+[2026-06-12 20:52:09] [INFO] [ORCHESTRATOR] Querying NVIDIA (meta/llama-3.1-70b-instruct) Classifier (Pydantic enforced)...
+[2026-06-12 21:04:15] [SUCCESS] [ORCHESTRATOR] Received and successfully validated LLM JSON response. | Tokens: 66355 (In: 65743, Out: 612)
+[2026-06-12 21:04:15] [INFO] [ORCHESTRATOR] LLM Verdict for registry_hive 'NTUSER Hive (/Users/temporary/NTUSER.DAT)': SUSPICIOUS (Confidence: MEDIUM)
+[2026-06-12 21:04:15] [INFO] [ORCHESTRATOR] LLM Reasoning: The artifact matches the rule PERSISTENCE_001, but the false positive disproval check FP_009_KNOWN_SOFTWARE is INCONCLUSIVE due to lack of information about the registry path.
+[2026-06-12 21:04:15] [INFO] [ORCHESTRATOR] Rule Applied: PERSISTENCE_001
+[2026-06-12 21:04:15] [SUCCESS] [ORCHESTRATOR] All suspect entities analyzed. Processing final exhaustive report.
+[2026-06-12 21:04:15] [INFO] [ORCHESTRATOR] Initiating Exhaustive MITRE ATT&CK Report Generation...
+[2026-06-12 21:04:15] [INFO] [AGENT] Synthesizing executive report from isolated threats...
+[2026-06-12 21:05:47] [INFO] [AGENT] Synthesis Tokens: 1365 (In: 895, Out: 470)
+[2026-06-12 21:05:47] [SUCCESS] [ORCHESTRATOR] Executive Synthesis and Dynamic Recommendations appended successfully.
+[2026-06-12 21:05:47] [SUCCESS] [ORCHESTRATOR] Report forged at: /mnt/sift_ext4/sift_home/projects/project_mantis_github/agent_v0.5.2_nvidia(test_only)/PM_MITRE_Report_20260612_210415.md
+[2026-06-12 21:05:47] [INFO] [ORCHESTRATOR] Document Integrity Hash (SHA-256): cb29c9824f8a3913f6cc254f91df482ae881a36e8fcb4c4a853d7dc980be7e2a

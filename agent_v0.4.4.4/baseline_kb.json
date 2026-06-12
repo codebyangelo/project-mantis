@@ -1,0 +1,24 @@
+{
+  "corporate_subnets": [
+    "10.0.0.0/8",
+    "172.16.0.0/12",
+    "192.168.0.0/16"
+  ],
+  "cloud_sync_paths": [
+    "G:\\\\My Drive",
+    "C:\\\\Users\\\\[^\\\\]+\\\\OneDrive"
+  ],
+  "jit_compilers": [
+    "searchapp.exe",
+    "lockapp.exe",
+    "msedge.exe",
+    "chrome.exe",
+    "code.exe"
+  ],
+  "microsoft_cdns": [
+    "13.107.0.0/16",
+    "72.21.81.0/24",
+    "204.79.197.0/24",
+    "13.107.42.0/24"
+  ]
+}
