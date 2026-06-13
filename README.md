@@ -61,27 +61,27 @@ During development and final validation, Project Mantis was aggressively tested 
 
 Judges can download these datasets directly here: 
 
-CFReDs Data Leakage Case: 
+CFReDs Data Leakage Case: https://cfreds.nist.gov/all/NIST/DataLeakageCase
 
-Rocba Case: 
+Rocba Case: https://sansorg.egnyte.com/fl/HhH7crTYT4JK#folder-link/HACKATHON-2026/Standard%20Forensic%20Case
 
 ---
 
 ## Accuracy Report & Self-Assessment 
 
-Honesty is valued over perfection. Below is our self-assessment regarding the agent's accuracy across testing:
+Below is my self-assessment regarding the agent's accuracy across testing:
 
-- **False Positives:** The deterministic Sieve initially threw a high rate of false positives on native Windows binaries (like `svchost.exe`) because of matching LOTL (Living off the Land) heuristics. To counter this, we introduced the `BaselineEngine` and the "Presumption of Benignity" rule, which successfully dropped false positives by forcing the LLM to actively disprove benign administrative intent before rendering a MALICIOUS verdict.
-- **Missed Artifacts:** The agent occasionally missed fileless payloads that executed entirely in memory without spawning a persistent disk footprint, because the Volatility 3 `malfind` plugin timeout constraints sometimes prevented a full memory dump. We mitigated this by introducing the dynamic `MCP Server`, allowing the agent to request deep string carving when initial evidence was inconclusive.
-- **Hallucinated Claims:** In earlier versions, unstructured LLMs would frequently hallucinate file paths or user intentions that did not exist in the telemetry. We resolved this by implementing the "Hard Grounding Layer" (The Citation Trap) in `v0.5.2`. This strictly forces any model (whether Vertex AI or local Llama 3.1) to provide exact, character-for-character substrings from the evidence to back its claims, aggressively minimizing hallucinations by structurally rejecting misquotes.
+- **False Positives:** The deterministic Sieve initially threw a high rate of false positives on native Windows binaries (like `svchost.exe`) because of matching LOTL (Living off the Land) heuristics. To counter this, I introduced the `BaselineEngine` and the "Presumption of Benignity" rule, which successfully dropped false positives by forcing the LLM to actively disprove benign administrative intent before rendering a MALICIOUS verdict.
+- **Missed Artifacts:** The agent occasionally missed fileless payloads that executed entirely in memory without spawning a persistent disk footprint, because the Volatility 3 `malfind` plugin timeout constraints sometimes prevented a full memory dump. I mitigated this by introducing the dynamic `MCP Server`, allowing the agent to request deep string carving when initial evidence was inconclusive.
+- **Hallucinated Claims:** In earlier versions, unstructured LLMs would frequently hallucinate file paths or user intentions that did not exist in the telemetry. I resolved this by implementing the "Hard Grounding Layer" (The Citation Trap) in later versions. This strictly forces any model (whether Vertex AI or local Llama 3.1) to provide exact, character-for-character substrings from the evidence to back its claims, aggressively minimizing hallucinations by structurally rejecting misquotes.
 
 ---
 
 ## Audit Trail & Execution Logs
 
-To prove that Mantis does not rely on "Demo Magic" or post-processed artifacts, we have explicitly preserved the raw, timestamped execution traces and LLM thought ledgers for our final validated runs. 
+To prove that Mantis does not rely on "Demo Magic" or post-processed artifacts, I have explicitly preserved the raw, timestamped execution traces and LLM thought ledgers for our final validated runs. 
 
-Evaluators can trace every single claim from our final MITRE ATT&CK reports directly back to the exact JSON payloads emitted by the agents by reviewing these logs:
+Evaluators can trace every single claim from the final MITRE ATT&CK reports directly back to the exact JSON payloads emitted by the agents by reviewing these logs:
 
 1. **[Vertex AI (Primary Run)](./agent_v0.5.2_stable-hackathon/)**: Check `execution.log` and `thoughts.txt` in this directory to see the native, highly-optimized performance of the framework.
 2. **[NVIDIA Llama 3.1 70B (Agnostic Proof)](./agent_v0.5.2_nvidia(test_only)/)**: Check the logs in this directory to verify our Agnostic Provider Adapter in action. You will see an open-source 70B model successfully adhering to the exact same strict Pydantic schemas and deterministic Sieve logic as Vertex, proving the architectural constraints are model-independent.
