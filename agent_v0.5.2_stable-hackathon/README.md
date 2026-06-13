@@ -14,6 +14,27 @@ Any other datasets fall outside the current verified scope of the project and ma
 Project Mantis is designed to be highly portable. You do not need to move your massive evidence files; simply tell the agent where your evidence is located using environment variables.
 
 ### 0. Installation
+To test the stable, hackathon-ready version of Project Mantis, you have two options for cloning the repository:
+  
+    #### Option A: Standard Clone (Easiest)
+    Because the entire repository is very small (~64MB), you can clone the whole project and navigate to the final iteration:
+    ```bash
+    git clone https://github.com/codebyangelo/project-mantis.git
+    cd project-mantis/agent_v0.5.2_stable-hackathon
+    pip install -r requirements.txt
+
+    #### Option B: Sparse Checkout (Cleanest Workspace)
+  
+    If you prefer to only download the final hackathon files and ignore our 60+ development iterations, use this method:
+  
+    git clone --no-checkout --depth 1 https://github.com/codebyangelo/project-mantis.git
+    cd project-mantis
+    git sparse-checkout set agent_v0.5.2_stable-hackathon
+    git checkout main
+    cd agent_v0.5.2_stable-hackathon
+    pip install -r requirements.txt
+
+
 Project Mantis requires **Python 3.10+**. Set up your environment and install the strict deterministic dependencies before running:
 
 ```bash
