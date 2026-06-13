@@ -6,7 +6,7 @@ Welcome to the Project Mantis repository! This project is an autonomous Digital 
 
 ---
 
-## Setup & Installation Instructions (Check 3 & 9)
+## Setup & Installation Instructions
 
 To run the agent locally, please navigate to the stable build directory and follow the complete, step-by-step installation instructions provided there:
 👉 **[View Full Setup Instructions Here](./agent_v0.5.2_stable-hackathon/README.md#0-installation)**
@@ -16,7 +16,7 @@ To test the agent, you will need a memory/disk image. Project Mantis was designe
 
 ---
 
-## Architecture Diagram (Check 5)
+## Architecture Diagram
 
 The following Mermaid diagram illustrates how the components of Mantis interact, including the trust boundaries between deterministic extraction and the Generative AI orchestration.
 
@@ -47,23 +47,27 @@ graph TD
 
 To address the challenges of autonomous incident response, Mantis implements several rigorous structural designs:
 
-1. **Architectural Guardrails (Not Just Prompts):** Rather than just telling an LLM to "be careful" via system prompts, Mantis physically restricts the agent. The `mcp_server.py` exposes only strict, read-only typed functions (no write access). Furthermore, the `sieve.py` acts as a deterministic, math-based heuristic filter that forces the LLM to evaluate actual suspect entities, preventing it from wandering.
+1. **Architectural Guardrails:** Rather than just telling an LLM to "be careful" via system prompts, Mantis physically restricts the agent. The `mcp_server.py` exposes only strict, read-only typed functions (no write access). Furthermore, the `sieve.py` acts as a deterministic, math-based heuristic filter that forces the LLM to evaluate actual suspect entities, preventing it from wandering.
 2. **Autonomous Self-Correction Loop:** Mantis employs an adversarial multi-agent debate FSM. If the primary "Prosecutor" agent claims an artifact is malicious, a separate "Defense Attorney" agent aggressively attempts to overrule it by cross-referencing benign administrative logic and baseline IT tags. Finally, a deterministic "Verifier" audits the debate. This forces organic self-correction without human intervention.
 3. **100% Audit Trail Traceability:** To prevent the "confident presentation of hallucinated findings," Mantis implements a **Hard Grounding Layer**. The LLM is structurally forced via strict Pydantic schemas to output an `exact_telemetry_quote` for every claim. If the substring does not literally exist in the evidence tool output, the run is rejected. This allows evaluators to trace every single claim in the final synthesis directly back to a specific tool execution log.
 
 ---
 
-## Evidence Dataset Documentation (Check 7)
+## Evidence Dataset Documentation
 
 During development and final validation, Project Mantis was aggressively tested against two prominent, publicly available DFIR challenge datasets:
-1. **CFReDS Data Leakage Case:** A complex insider threat scenario involving memory payloads and cloud exfiltration.
+1. **CFReDS Data Leakage Case:** A complex insider threat scenario involving exfiltration.
 2. **ROCBA (Ransomware):** A destructive malware dataset requiring deep process hollowing and registry persistence tracking.
 
-Judges can download these datasets directly from their respective authoritative sources to run Mantis against the exact same evidence.
+Judges can download these datasets directly here: 
+
+CFReDs Data Leakage Case: 
+
+Rocba Case: 
 
 ---
 
-## Accuracy Report & Self-Assessment (Check 8)
+## Accuracy Report & Self-Assessment 
 
 Honesty is valued over perfection. Below is our self-assessment regarding the agent's accuracy across testing:
 
@@ -73,7 +77,7 @@ Honesty is valued over perfection. Below is our self-assessment regarding the ag
 
 ---
 
-## Audit Trail & Execution Logs (Check 10)
+## Audit Trail & Execution Logs
 
 To prove that Mantis does not rely on "Demo Magic" or post-processed artifacts, we have explicitly preserved the raw, timestamped execution traces and LLM thought ledgers for our final validated runs. 
 
