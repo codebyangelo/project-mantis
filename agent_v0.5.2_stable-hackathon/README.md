@@ -197,4 +197,4 @@ Project Mantis evolved through intense iterative development, actively adapting 
 ## Author's Note
 
 **Project Mantis was architected and built entirely solo over the course of one month by orchestrating AI.** 
-By leveraging advanced agentic AI coding assistants to write, refactor, debug, and rigorously load-test the architecture, a single developer was able to engineer an enterprise-grade, deterministic DFIR pipeline that autonomously performs at the level of a Tier-3 SOC analyst.
+By leveraging advanced agentic AI coding assistants to write, refactor, debug, and rigorously load-test the architecture, a single developer was able to engineer an enterprise-grade, deterministic DFIR pipeline that autonomously performs validated DFIR investigations within the tested scope.
