@@ -43,7 +43,7 @@ graph TD
 
 ---
 
-## Core Architectural Innovations (For Evaluators)
+## Core Architectural Innovations
 
 To address the challenges of autonomous incident response, Mantis implements several rigorous structural designs:
 
