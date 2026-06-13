@@ -101,7 +101,7 @@ Other architectures were tested but failed the autonomous pipeline for two disti
 
 ## Autonomous Investigation Cost Analysis
 
-Project Mantis processes a massive volume of raw telemetry per execution. Below is the total token consumption and real-world cost analysis for fully investigating both testing datasets using **Vertex Gemini 1.5/3.1 Flash** (priced at $0.075/1M input tokens and $0.30/1M output tokens).
+Project Mantis processes a massive volume of raw telemetry per execution. Below is the total token consumption and real-world cost analysis for fully investigating both testing datasets using **Vertex Gemini 3.1 Flash Lite** (priced at $0.075/1M input tokens and $0.30/1M output tokens).
 
 ### 1. CFReDS Data Leakage (Disk Forensics)
 - **Entities Evaluated:** 17
@@ -190,7 +190,7 @@ Project Mantis evolved through intense iterative development, actively adapting 
 - **v0.2.x (The Sieve):** Introduced `sieve.py` to deterministically filter out obvious benign artifacts via RegEx, dropping API token consumption by over 80%.
 - **v0.3.x (The Playbook & Schema):** Introduced the `dfir_playbook.json` and strict Pydantic JSON schemas. This eliminated structural hallucinations and forced the LLM to follow rigid NIST incident response standards.
 - **v0.4.x (The MCP Layer & Hard Grounding):** Introduced the FastMCP server for dynamic `icat` string carving and implemented the "Hard Grounding Layer" in the Orchestrator to force the LLM to provide exact character-for-character substring citations from the telemetry.
-- **v0.5.2 (The Multi-Agent Agnostic Stable Release):** Refactored the architecture to be fully API-agnostic. After load-testing Llama 3.1, Groq, and Cerebras, Vertex Gemini 1.5/3.1 Flash was solidified as the only viable infrastructure. Finalized recursive registry carving and advanced fileless anti-forensics detection.
+- **v0.5.2 (The Multi-Agent Agnostic Stable Release):** Refactored the architecture to be fully API-agnostic. After load-testing Llama 3.1, Groq, and Cerebras, Vertex Gemini 3.1 Flash Lite was solidified as the only viable infrastructure. Finalized recursive registry carving and advanced fileless anti-forensics detection.
 
 ---
 
