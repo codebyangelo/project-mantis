@@ -98,14 +98,14 @@ export OPENAI_MODEL_NAME="gemini-3.1-flash-lite"
 ### 3. Run the Extractor
 The extractor will automatically classify the images, run Volatility 3 and FLS, and build the `evidence_cache` in the same directory.
 ```bash
-python3 extractor.py
+python3 extractor.py --deep
 ```
 *(Note: Running this will overwrite any existing cache and rebuild it from scratch, which can take a while for large images.)*
 
 ### 4. Run the Mantis Orchestrator
 Once extraction is complete, start the orchestration engine. This initializes the deterministic sieve, creates the FSM loops, and invokes the generative APIs.
 ```bash
-python3 orchestrator.py
+python3 orchestrator.py --deep
 ```
 
 The final report will be generated as a Markdown file in the project directory.
