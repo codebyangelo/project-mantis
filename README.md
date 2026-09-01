@@ -1,5 +1,7 @@
 # Project Mantis: Autonomous DFIR Agent
 
+[![CI: Python Test](https://github.com/codebyangelo/project-mantis/actions/workflows/test.yml/badge.svg)](https://github.com/codebyangelo/project-mantis/actions/workflows/test.yml)
+
 Welcome to the Project Mantis repository! This project is an autonomous Digital Forensics and Incident Response (DFIR) framework designed to ingest raw memory and disk images, extract artifacts using SIFT Workstation tools, and perform deterministic, hallucination-free triage using an LLM Agnostic Provider architecture.
 
 **The final, stable hackathon build is located in [`agent_v0.5.2_stable-hackathon`](./agent_v0.5.2_stable-hackathon/).** All other directories represent the iterative architectural evolution of the agent.
