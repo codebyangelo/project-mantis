@@ -1,0 +1,175 @@
+{
+  "playbook_version": "1.0.1",
+  "nist_mapping": "SP 800-61r2 Detection & Analysis",
+  "rules": [
+    {
+      "rule_id": "PROC_INJ_001",
+      "name": "RWX or Executable Memory Allocation in System Process",
+      "nist_phase": "Detection & Analysis",
+      "nist_step": "Analyze Indicators",
+      "threat_category": "Process Injection",
+      "target_artifact": "process",
+      "evaluation_logic": {
+        "conditions": [
+          {"field": "signals", "operator": "contains", "value": "SIG_RWX_INJECTION"}
+        ],
+        "conjunction": "AND"
+      },
+      "false_positive_disproval": [
+        {
+          "check_id": "FP_001_JIT_VERIFICATION",
+          "description": "DETERMINISTIC: Checked by sieve_deterministic.py. If deterministic layer flagged TRAMPOLINE, it is process injection. If deterministic layer flagged JIT_PADDING or CFG, it is benign.",
+          "disproval_logic": "IF deterministic classification is JIT_PADDING OR CFG THEN DISPROVE."
+        },
+        {
+          "check_id": "FP_002_DYNAMIC_TIMELINE_CORRELATION",
+          "description": "Verify if a dropper artifact exists in volatile space (/tmp, /dev/shm). If dynamic investigation indicates dropper executions correlation, FAIL to disprove.",
+          "disproval_logic": "IF dynamic investigation reveals dropper artifacts THEN FAIL_TO_DISPROVE."
+        }
+      ],
+      "mitre_mapping": {
+        "technique": "T1055",
+        "tactic": "Defense Evasion",
+        "procedure": "Process Injection: RWX shellcode in system process"
+      },
+      "severity_if_confirmed": "CRITICAL"
+    },
+    {
+      "rule_id": "PROC_MASQ_001",
+      "name": "Process Name Masquerading",
+      "nist_phase": "Detection & Analysis",
+      "nist_step": "Analyze Indicators",
+      "threat_category": "Defense Evasion",
+      "target_artifact": "process",
+      "evaluation_logic": {
+        "conditions": [
+          {"field": "signals", "operator": "contains", "value": "SIG_MASQUERADING"}
+        ],
+        "conjunction": "AND"
+      },
+      "false_positive_disproval": [
+        {
+          "check_id": "FP_003_LEGITIMATE_TRUNCATION",
+          "description": "Check if the process name truncation is due to the 15-character TASK_COMM_LEN limit in the Linux kernel (e.g. systemd-resolve -> systemd-resolv).",
+          "disproval_logic": "IF Process name matches a known baseline process truncated at exactly 15 characters THEN DISPROVE."
+        }
+      ],
+      "mitre_mapping": {
+        "technique": "T1036",
+        "tactic": "Defense Evasion",
+        "procedure": "Masquerading"
+      },
+      "severity_if_confirmed": "HIGH"
+    },
+    {
+      "rule_id": "DATA_EXFIL_001",
+      "name": "Staging Archive in Temporary or Volatile Directory",
+      "nist_phase": "Detection & Analysis",
+      "nist_step": "Analyze Indicators",
+      "threat_category": "Data Exfiltration",
+      "target_artifact": "file",
+      "evaluation_logic": {
+        "conditions": [
+          {"field": "path", "operator": "regex_match", "value": "\\.(zip|rar|7z|tar\\.gz|tgz)$"},
+          {"field": "signals", "operator": "contains", "value": "SIG_DATA_LEAKAGE_INDICATOR"}
+        ],
+        "conjunction": "AND"
+      },
+      "false_positive_disproval": [
+        {
+          "check_id": "FP_004_KNOWN_BACKUP_OR_PERSONAL_FILE",
+          "description": "Check if the archive is an administrative backup or benign download. If telemetry lacks clear metadata, disproval is INCONUSIVE.",
+          "disproval_logic": "IF archive matches system backup patterns THEN DISPROVE."
+        }
+      ],
+      "mitre_mapping": {
+        "technique": "T1048",
+        "tactic": "Exfiltration",
+        "procedure": "Exfiltration Over Alternative Protocol / Staging"
+      },
+      "severity_if_confirmed": "HIGH"
+    },
+    {
+      "rule_id": "COLLECTION_001",
+      "name": "Automated Collection Script in Temp",
+      "nist_phase": "Detection & Analysis",
+      "nist_step": "Analyze Indicators",
+      "threat_category": "Collection",
+      "target_artifact": "file",
+      "evaluation_logic": {
+        "conditions": [
+          {"field": "path", "operator": "regex_match", "value": "\\.(sh|py|pl|rb|py3)$"}
+        ],
+        "conjunction": "AND"
+      },
+      "false_positive_disproval": [
+        {
+          "check_id": "FP_005_LEGITIMATE_SCRIPT",
+          "description": "Check if script is run by package manager or administrative cron updates.",
+          "disproval_logic": "IF Script belongs to legitimate system updates or apt/dpkg context THEN DISPROVE."
+        }
+      ],
+      "mitre_mapping": {
+        "technique": "T1119",
+        "tactic": "Collection",
+        "procedure": "Automated Collection"
+      },
+      "severity_if_confirmed": "HIGH"
+    },
+    {
+      "rule_id": "EXECUTION_001",
+      "name": "Dropped Executable ELF Payload",
+      "nist_phase": "Detection & Analysis",
+      "nist_step": "Analyze Indicators",
+      "threat_category": "Execution",
+      "target_artifact": "file",
+      "evaluation_logic": {
+        "conditions": [
+          {"field": "path", "operator": "regex_match", "value": "\\.(elf|bin|so|out)$"},
+          {"field": "path", "operator": "regex_match", "value": "(/tmp/|/var/tmp/|/dev/shm/)"}
+        ],
+        "conjunction": "AND"
+      },
+      "false_positive_disproval": [
+        {
+          "check_id": "FP_006_LEGITIMATE_TEMP_BINARY",
+          "description": "Verify if binary belongs to legitimate compiler outputs, package installers, or local tests.",
+          "disproval_logic": "IF Binary is recognized developer test output THEN DISPROVE."
+        }
+      ],
+      "mitre_mapping": {
+        "technique": "T1204",
+        "tactic": "Execution",
+        "procedure": "User Execution / Malicious File"
+      },
+      "severity_if_confirmed": "CRITICAL"
+    },
+    {
+      "rule_id": "ANTI_FORENSICS_001",
+      "name": "Data Destruction and Evidence Concealment",
+      "nist_phase": "Detection & Analysis",
+      "nist_step": "Analyze Indicators",
+      "threat_category": "Anti-Forensics",
+      "target_artifact": "file",
+      "evaluation_logic": {
+        "conditions": [
+          {"field": "path", "operator": "regex_match", "value": "(shred|wipe|dd|deleted)"}
+        ],
+        "conjunction": "AND"
+      },
+      "false_positive_disproval": [
+        {
+          "check_id": "FP_007_AUTHORIZED_CLEANUP",
+          "description": "Check if deletion command belongs to legitimate cleanups or system log rotations.",
+          "disproval_logic": "IF performed during routine logrotate or sys admin cleaning THEN DISPROVE."
+        }
+      ],
+      "mitre_mapping": {
+        "technique": "T1070",
+        "tactic": "Defense Evasion",
+        "procedure": "Indicator Removal on Host: File Deletion"
+      },
+      "severity_if_confirmed": "CRITICAL"
+    }
+  ]
+}
