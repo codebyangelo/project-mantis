@@ -2,9 +2,6 @@
 Project Mantis: Autonomous DFIR Framework
 """
 
-__version__ = "0.5.5"
-__author__ = "Angelo Ayton"
-
 from .courtroom import CourtroomScriptGenerator
 from .exceptions import (
     MantisBoundaryError,
@@ -21,12 +18,23 @@ from .extractor import (
     validate_sector_bounds,
 )
 from .falsifier import AdversarialFalsifier, CounterHypothesis
+from .mcp import (
+    MCP_TOOLS,
+    MCPServer,
+    dispatch_tool,
+    run_mcp_server,
+)
+
+__version__ = "0.5.5"
+__author__ = "Angelo Ayton"
 
 __all__ = [
+    "MCP_TOOLS",
     "AdversarialFalsifier",
     "ClampedStreamReader",
     "CounterHypothesis",
     "CourtroomScriptGenerator",
+    "MCPServer",
     "MantisBoundaryError",
     "MantisError",
     "MantisInvalidBootSignatureError",
@@ -36,6 +44,8 @@ __all__ = [
     "MantisTruncatedBlockError",
     "__author__",
     "__version__",
+    "dispatch_tool",
     "invalidate_evidence_cache",
+    "run_mcp_server",
     "validate_sector_bounds",
 ]
