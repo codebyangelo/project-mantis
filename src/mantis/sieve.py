@@ -3,8 +3,8 @@ import os
 import re
 from typing import Dict, List, Tuple, Any
 import datetime
-from config import CACHE_DIR
-from logger import ExecutionLogger
+from .config import CACHE_DIR
+from .logger import ExecutionLogger
 
 # =============================================================================
 # PHASE 0: PRE-COMPILED PATTERNS (optimized for Celeron: compile once, match many)

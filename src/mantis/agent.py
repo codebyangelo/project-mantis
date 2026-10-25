@@ -4,7 +4,7 @@ from typing import List, Optional
 from pydantic import BaseModel, Field
 from google import genai
 from google.genai import types
-from logger import ExecutionLogger
+from .logger import ExecutionLogger
 
 class ChainOfThoughtStep(BaseModel):
     step_number: int

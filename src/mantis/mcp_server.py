@@ -7,8 +7,8 @@ import threading
 import hashlib
 import re
 from typing import List, Tuple, Set
-from config import EVIDENCE_DIR, CACHE_DIR, PLAYBOOK_PATH
-from logger import ExecutionLogger
+from .config import EVIDENCE_DIR, CACHE_DIR, PLAYBOOK_PATH
+from .logger import ExecutionLogger
 
 def validate_path(path_str: str) -> str:
     """Validates and resolves a path against allowed sandbox directories to prevent traversal."""

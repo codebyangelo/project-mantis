@@ -4,8 +4,8 @@ import json
 import re
 import time
 import argparse
-from config import EVIDENCE_DIR, CACHE_DIR
-from logger import ExecutionLogger
+from .config import EVIDENCE_DIR, CACHE_DIR
+from .logger import ExecutionLogger
 
 def classify_image(file_path):
     """

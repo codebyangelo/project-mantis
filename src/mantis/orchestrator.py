@@ -34,16 +34,16 @@ def restore_telemetry(text: str, mapping: dict):
         text = text.replace(replacement, original)
     return text
 
-from mcp_server import (
+from .mcp_server import (
     get_evidence_context, query_json_cache,
     extract_and_carve_hive, carve_memory_strings, read_dfir_playbook, run_with_timer, search_disk_timeline
 )
-from config import EVIDENCE_DIR, CACHE_DIR, PLAYBOOK_PATH, IOC_STORE_PATH, THOUGHTS_PATH
+from .config import EVIDENCE_DIR, CACHE_DIR, PLAYBOOK_PATH, IOC_STORE_PATH, THOUGHTS_PATH
 
 from pydantic import ValidationError
-from logger import ExecutionLogger
-from agent import MantisAgent, MantisEvaluation, DefenseEvaluation, VerifierEvaluation, ExecutionChainSynthesis
-from baseline_engine import BaselineEngine
+from .logger import ExecutionLogger
+from .agent import MantisAgent, MantisEvaluation, DefenseEvaluation, VerifierEvaluation, ExecutionChainSynthesis
+from .baseline_engine import BaselineEngine
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_PATH = THOUGHTS_PATH
@@ -328,13 +328,13 @@ def get_state_hash(ent: dict) -> str:
     return hashlib.sha256(dumped.encode("utf-8")).hexdigest()
 
 def run_fsm_loop(chat_session, agent_system=None, triage_history=None, verdict_history=None, scan_window_id: int = 0, active_alerts: list = None):
-    from agent import MantisEvaluation, RuleApplied, VerdictInfo, MitreMapping, AuditTrail
+    from .agent import MantisEvaluation, RuleApplied, VerdictInfo, MitreMapping, AuditTrail
     ExecutionLogger.log("ORCHESTRATOR", "Initializing Exhaustive Deterministic State Machine...")
     
     ctx = get_evidence_context()
     ExecutionLogger.log("ORCHESTRATOR", "Evidence Context Acquired.")
     
-    from sieve import get_suspect_entities
+    from .sieve import get_suspect_entities
     entities = get_suspect_entities(api_budget=30)
     
     if not entities:
@@ -433,7 +433,7 @@ def run_fsm_loop(chat_session, agent_system=None, triage_history=None, verdict_h
         deterministic_verdict = None
         if ent_type == "process" and "malfind" in obfuscated_evidence and obfuscated_evidence["malfind"]:
             try:
-                from sieve_deterministic import MalfindClassifier, MalfindAllocation
+                from .sieve_deterministic import MalfindClassifier, MalfindAllocation
                 allocs = [
                     MalfindAllocation(
                         start_vpn=a.get('Start VPN', ''),
@@ -899,7 +899,7 @@ def main():
                         shutil.rmtree(file_path)
                 except Exception as e:
                     ExecutionLogger.log("ORCHESTRATOR", f"Failed to delete cached file {file_path}: {e}", "WARN")
-        from live_collector import collect_live_telemetry
+        from .live_collector import collect_live_telemetry
         collect_live_telemetry()
         
     verify_and_trigger_cache()
