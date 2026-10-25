@@ -5,32 +5,37 @@ Project Mantis: Autonomous DFIR Framework
 __version__ = "0.5.5"
 __author__ = "Angelo Ayton"
 
+from .courtroom import CourtroomScriptGenerator
 from .exceptions import (
-    MantisError,
     MantisBoundaryError,
-    MantisTruncatedBlockError,
+    MantisError,
     MantisInvalidBootSignatureError,
     MantisOutOfBoundsPartitionError,
     MantisR2Error,
     MantisReconstructionError,
+    MantisTruncatedBlockError,
 )
 from .extractor import (
-    validate_sector_bounds,
-    invalidate_evidence_cache,
     ClampedStreamReader,
+    invalidate_evidence_cache,
+    validate_sector_bounds,
 )
+from .falsifier import AdversarialFalsifier, CounterHypothesis
 
 __all__ = [
-    "__version__",
-    "__author__",
-    "MantisError",
+    "AdversarialFalsifier",
+    "ClampedStreamReader",
+    "CounterHypothesis",
+    "CourtroomScriptGenerator",
     "MantisBoundaryError",
-    "MantisTruncatedBlockError",
+    "MantisError",
     "MantisInvalidBootSignatureError",
     "MantisOutOfBoundsPartitionError",
     "MantisR2Error",
     "MantisReconstructionError",
-    "validate_sector_bounds",
+    "MantisTruncatedBlockError",
+    "__author__",
+    "__version__",
     "invalidate_evidence_cache",
-    "ClampedStreamReader",
+    "validate_sector_bounds",
 ]

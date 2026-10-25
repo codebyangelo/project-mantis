@@ -44,6 +44,8 @@ from pydantic import ValidationError
 from .logger import ExecutionLogger
 from .agent import MantisAgent, MantisEvaluation, DefenseEvaluation, VerifierEvaluation, ExecutionChainSynthesis
 from .baseline_engine import BaselineEngine
+from .falsifier import AdversarialFalsifier, CounterHypothesis
+from .courtroom import CourtroomScriptGenerator
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_PATH = THOUGHTS_PATH
@@ -265,6 +267,9 @@ def generate_mitre_report(results: list, agent_system=None):
         f"* **Cleared Entities:** {len(cleared_pids)}\n",
         f"* **Cleared Entities:** {len(cleared_pids)}\n{token_str}\n"
     )
+
+    if isolated_threats:
+        report_content += CourtroomScriptGenerator.generate_code_mode_section(isolated_threats)
 
     with open(report_path, "w", encoding="utf-8") as f:
         f.write(report_content)
@@ -729,9 +734,23 @@ def run_fsm_loop(chat_session, agent_system=None, triage_history=None, verdict_h
         if eval_result.verdict.classification.upper() == "MALICIOUS":
             if (deterministic_verdict and deterministic_verdict.verdict == "MALICIOUS") or (deterministic_playbook_evaluation and deterministic_playbook_evaluation.verdict.classification.upper() == "MALICIOUS"):
                 ExecutionLogger.log("ORCHESTRATOR", "Deterministic MALICIOUS verdict. Bypassing Defense Attorney.", "SUCCESS")
-            elif agent_system:
-                # Invoke Defense Attorney
-                ExecutionLogger.log("ORCHESTRATOR", "Prosecutor ruled MALICIOUS. Invoking Defense Attorney...", "WARN")
+            else:
+                falsifier = AdversarialFalsifier()
+                det_falsification = falsifier.check_deterministic_falsification(
+                    entity_label=ent.get("label", ""),
+                    entity_evidence=obfuscated_evidence,
+                )
+                if det_falsification and det_falsification.is_refuted:
+                    eval_result.verdict.classification = det_falsification.recommended_verdict
+                    eval_result.verdict.confidence_reasoning = f"Falsifier OVERRULED: {det_falsification.alternative_explanation}"
+                    ExecutionLogger.log(
+                        "ORCHESTRATOR",
+                        f"Adversarial Falsifier OVERRULED accusation: {det_falsification.alternative_explanation}",
+                        "SUCCESS",
+                    )
+                elif agent_system:
+                    # Invoke Defense Attorney
+                    ExecutionLogger.log("ORCHESTRATOR", "Prosecutor ruled MALICIOUS. Invoking Defense Attorney...", "WARN")
                 defense_session = agent_system.create_defense_session()
                 defense_prompt = f"""
                 PROSECUTOR'S ACCUSATION:
