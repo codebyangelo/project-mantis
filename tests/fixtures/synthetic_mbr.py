@@ -19,24 +19,12 @@ PARTITION_TYPE_LINUX = 0x83
 PARTITION_TYPE_GPT_PROTECTIVE = 0xEE
 
 
-class MantisBoundaryError(Exception):
-    """Base exception for forensic boundary violations."""
-    pass
-
-
-class MantisTruncatedBlockError(MantisBoundaryError):
-    """Raised when a candidate sector is truncated (<512 bytes)."""
-    pass
-
-
-class MantisInvalidBootSignatureError(MantisBoundaryError):
-    """Raised when an MBR sector lacks the 0x55AA magic trailer."""
-    pass
-
-
-class MantisOutOfBoundsPartitionError(MantisBoundaryError):
-    """Raised when partition extent exceeds total image boundaries."""
-    pass
+from mantis.exceptions import (
+    MantisBoundaryError,
+    MantisTruncatedBlockError,
+    MantisInvalidBootSignatureError,
+    MantisOutOfBoundsPartitionError,
+)
 
 
 def encode_partition_record(
