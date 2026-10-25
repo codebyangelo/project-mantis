@@ -1,89 +1,102 @@
-# Project Mantis: Autonomous DFIR Agent
+# Project Mantis: Autonomous DFIR Framework
 
 [![CI: Python Test](https://github.com/codebyangelo/project-mantis/actions/workflows/test.yml/badge.svg)](https://github.com/codebyangelo/project-mantis/actions/workflows/test.yml)
 
-Welcome to the Project Mantis repository! This project is an autonomous Digital Forensics and Incident Response (DFIR) framework designed to ingest raw memory and disk images, extract artifacts using SIFT Workstation tools, and perform deterministic, hallucination-free triage using an LLM Agnostic Provider architecture.
+Welcome to the Project Mantis repository. Project Mantis is an autonomous Digital Forensics and Incident Response (DFIR) framework designed to ingest raw memory and disk images, extract artifacts using SIFT Workstation tools and live `/proc` interfaces, and perform deterministic, hallucination-free triage using an LLM Agnostic Provider architecture.
 
-**The final, stable hackathon build is located in [`agent_v0.5.2_stable-hackathon`](./agent_v0.5.2_stable-hackathon/).** All other directories represent the iterative architectural evolution of the agent.
-
----
-
-## Setup & Installation Instructions
-
-To run the agent locally, please navigate to the stable build directory and follow the complete, step-by-step installation instructions provided there:
-👉 **[View Full Setup Instructions Here](./agent_v0.5.2_stable-hackathon/README.md#0-installation)**
-
-**Try-It-Out Access:** 
-To test the agent, you will need a memory/disk image. Project Mantis was designed to operate entirely locally on the SIFT Workstation to maintain chain-of-custody privacy. You can test it against the public CFReDS or ROCBA datasets (see "Evidence Dataset Documentation" below for download links) by pointing your `PM_EVIDENCE_DIR` environment variable to the downloaded images.
+> [!NOTE]
+> **Hackathon Provenance & Historical Archive:**
+> The original SIFT/SANS Hackathon submission (`v0.5.2`) and all iterative hackathon prototypes (`v0.0.1` through `v0.5.1`) are permanently preserved in Git history and archived on branch [`archive/hackathon-v0.5.2`](https://github.com/codebyangelo/project-mantis/tree/archive/hackathon-v0.5.2) and Git tag [`hackathon-archive-v0.5.2`](https://github.com/codebyangelo/project-mantis/releases/tag/hackathon-archive-v0.5.2).
+> 
+> The `main` branch contains the production-grade package (`src/mantis/`) with dual-OS (Linux & Windows) memory triage, surgical Volatility carving, and live system extraction.
 
 ---
 
 ## Architecture Diagram
 
-The following Mermaid diagram illustrates how the components of Mantis interact, including the trust boundaries between deterministic extraction and the Generative AI orchestration.
+The following Mermaid diagram illustrates how the components of Mantis interact, including the trust boundaries between deterministic extraction and the Generative AI orchestration:
 
 ```mermaid
 graph TD
-    subgraph SIFT Workstation [Trusted Boundary - Local SIFT Workstation]
-        A[Evidence Sources: Memory .raw, Disk .dd] --> B[Extractor Module]
-        B -->|Volatility 3 / FLS| C[Evidence Cache: JSON Tables]
-        C --> D[Deterministic Sieve]
+    subgraph SIFT Workstation [Trusted Boundary - Local SIFT Workstation / Live Host]
+        A[Evidence Sources: Memory .raw, Disk .dd, /proc Live] --> B[Extractor & Live Collector]
+        B -->|Volatility 3 / FLS / Maps| C[Evidence Cache: JSON Tables]
+        C --> D[Deterministic Sieve & State Hasher]
         D -->|Filtered Suspect Entities| E[Orchestrator FSM]
         
-        E -->|Request Surgical Carving| F[MCP Server]
+        E -->|Request Surgical Carving| F[MCP Server & Custom Vol Plugins]
         F -->|Deep String Regex / Path Resolution| C
     end
     
     subgraph External Provider [Untrusted Boundary - Generative API]
-        E -->|Strict Pydantic JSON Prompt| G[LLM Agnostic Adapter]
-        G -->|NVIDIA / Vertex / Groq / Cerebras| H[LLM Endpoint]
+        E -->|Strict Pydantic JSON Prompt / Gemini Schema| G[LLM Agnostic Adapter]
+        G -->|Google GenAI / NVIDIA / Vertex / Groq / Cerebras| H[LLM Endpoint]
         H -->|Validated Verbatim Citation| E
     end
-    
-    E -->|Final JSON Report| I[MITRE ATT&CK Report Pipeline]
+```
+
+For the comprehensive system specification, see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) and individual module deep-dives in [`docs/subsystems/`](docs/subsystems/).
+
+---
+
+## Installation & Setup
+
+### 1. Requirements
+* Linux (SIFT Workstation, Ubuntu 22.04+, or Termux/Android Linux)
+* Python 3.10+
+* Volatility 3 and The Sleuth Kit (`fls`, `tsk_recover`) for offline forensic triage
+
+### 2. Install Mantis
+Install editable package directly via `pip`:
+```bash
+git clone https://github.com/codebyangelo/project-mantis.git
+cd project-mantis
+pip install -e .
+```
+
+### 3. Running Unit Tests
+Execute the local regression and sieve unit test suite:
+```bash
+python3 -m unittest discover tests
 ```
 
 ---
 
-## Core Architectural Innovations
+## Repository Structure
 
-To address the challenges of autonomous incident response, Mantis implements several rigorous structural designs:
-
-1. **Architectural Guardrails:** Rather than just telling an LLM to "be careful" via system prompts, Mantis physically restricts the agent. The `mcp_server.py` exposes only strict, read-only typed functions (no write access). Furthermore, the `sieve.py` acts as a deterministic, math-based heuristic filter that forces the LLM to evaluate actual suspect entities, preventing it from wandering.
-2. **Autonomous Self-Correction Loop:** Mantis employs an adversarial multi-agent debate FSM. If the primary "Prosecutor" agent claims an artifact is malicious, a separate "Defense Attorney" agent aggressively attempts to overrule it by cross-referencing benign administrative logic and baseline IT tags. Finally, a deterministic "Verifier" audits the debate. This forces organic self-correction without human intervention.
-3. **100% Audit Trail Traceability:** To prevent the "confident presentation of hallucinated findings," Mantis implements a **Hard Grounding Layer**. The LLM is structurally forced via strict Pydantic schemas to output an `exact_telemetry_quote` for every claim. If the substring does not literally exist in the evidence tool output, the run is rejected. This allows evaluators to trace every single claim in the final synthesis directly back to a specific tool execution log.
+```
+project-mantis/
+├── pyproject.toml              # Modern build system & CLI configuration
+├── requirements.txt            # Locked dependencies
+├── src/
+│   └── mantis/                 # Core engine package
+│       ├── __init__.py         # Package version (0.5.5)
+│       ├── agent.py            # Gemini Structured Output & Provider Adapters
+│       ├── baseline_engine.py  # RFC1918 & Known-Good Baseline Engine
+│       ├── baseline_kb.json    # Baseline Knowledge Base
+│       ├── config.py           # Runtime paths and dynamic OS detection
+│       ├── dfir_playbook.json  # Windows DFIR State Machine Playbook
+│       ├── dfir_playbook_linux.json # Linux DFIR State Machine Playbook
+│       ├── extractor.py        # Volatility 3 Windows & Linux extractor
+│       ├── live_collector.py   # Pure-Python live Linux artifact extractor
+│       ├── logger.py           # Structured execution logger
+│       ├── mantis_carve.py     # Custom Volatility 3 VAD surgical carving plugins
+│       ├── mcp_server.py       # MCP Server & Surgical Carver
+│       ├── orchestrator.py     # Orchestrator FSM loop with SHA-256 state hashing
+│       ├── sieve.py            # Deterministic Windows & Linux sieve
+│       └── sieve_deterministic.py # JIT/CFG memory allocator classifier
+├── tests/                      # Unit and regression test suites
+│   ├── test_sieve.py           # Sieve memory allocation test
+│   └── test_mock_playbook.py   # Playbook mock run test harness
+├── docs/                       # Architectural documentation
+│   ├── ARCHITECTURE.md         # System Architecture & Subsystem Specification
+│   ├── subsystems/             # Subsystem technical documentation
+│   └── assets/                 # Architecture diagrams and figures
+└── .github/workflows/          # Continuous integration workflows
+```
 
 ---
 
-## Evidence Dataset Documentation
+## License
 
-During development and final validation, Project Mantis was aggressively tested against two prominent, publicly available DFIR challenge datasets:
-1. **CFReDS Data Leakage Case:** A complex insider threat scenario involving exfiltration.
-2. **ROCBA (Ransomware):** A destructive malware dataset requiring deep process hollowing and registry persistence tracking.
-
-Judges can download these datasets directly here: 
-
-CFReDs Data Leakage Case: https://cfreds.nist.gov/all/NIST/DataLeakageCase
-
-Rocba Case: https://sansorg.egnyte.com/fl/HhH7crTYT4JK#folder-link/HACKATHON-2026/Standard%20Forensic%20Case
-
----
-
-## Accuracy Report & Self-Assessment 
-
-Below is my self-assessment regarding the agent's accuracy across testing:
-
-- **False Positives:** The deterministic Sieve initially threw a high rate of false positives on native Windows binaries (like `svchost.exe`) because of matching LOTL (Living off the Land) heuristics. To counter this, I introduced the `BaselineEngine` and the "Presumption of Benignity" rule, which successfully dropped false positives by forcing the LLM to actively disprove benign administrative intent before rendering a MALICIOUS verdict.
-- **Missed Artifacts:** The agent occasionally missed fileless payloads that executed entirely in memory without spawning a persistent disk footprint, because the Volatility 3 `malfind` plugin timeout constraints sometimes prevented a full memory dump. I mitigated this by introducing the dynamic `MCP Server`, allowing the agent to request deep string carving when initial evidence was inconclusive.
-- **Hallucinated Claims:** In earlier versions, unstructured LLMs would frequently hallucinate file paths or user intentions that did not exist in the telemetry. I resolved this by implementing the "Hard Grounding Layer" (The Citation Trap) in later versions. This strictly forces any model (whether Vertex AI or local Llama 3.1) to provide exact, character-for-character substrings from the evidence to back its claims, aggressively minimizing hallucinations by structurally rejecting misquotes.
-
----
-
-## Audit Trail & Execution Logs
-
-To prove that Mantis does not rely on "Demo Magic" or post-processed artifacts, I have explicitly preserved the raw, timestamped execution traces and LLM thought ledgers for our final validated runs. 
-
-Evaluators can trace every single claim from the final MITRE ATT&CK reports directly back to the exact JSON payloads emitted by the agents by reviewing these logs:
-
-1. **[Vertex AI (Primary Run)](./agent_v0.5.2_stable-hackathon/)**: Check `execution.log` and `thoughts.txt` in this directory to see the native, highly-optimized performance of the framework.
-2. **[NVIDIA Llama 3.1 70B (Agnostic Proof)](./agent_v0.5.2_nvidia(test_only)/)**: Check the logs in this directory to verify our Agnostic Provider Adapter in action. You will see an open-source 70B model successfully adhering to the exact same strict Pydantic schemas and deterministic Sieve logic as Vertex, proving the architectural constraints are model-independent.
+Apache-2.0 License. See [LICENSE](LICENSE) for details.
