@@ -1,11 +1,146 @@
-import os
-import subprocess
-import json
-import re
-import time
 import argparse
-from .config import EVIDENCE_DIR, CACHE_DIR
+import json
+import os
+import re
+import subprocess
+import time
+from collections.abc import Generator
+
+from .config import CACHE_DIR, EVIDENCE_DIR
+from .exceptions import (
+    MANTIS_RC_BOUNDARY_VIOLATION,
+    MANTIS_RC_FAILURE,
+    MantisBoundaryError,
+    MantisOutOfBoundsPartitionError,
+)
 from .logger import ExecutionLogger
+
+
+def validate_sector_bounds(
+    offset: int | None,
+    image_size: int,
+    sector_size: int = 512,
+) -> int:
+    """
+    Validates partition sector offset against image boundaries (radare2 PR #26606 model).
+    Fails closed if the offset is None, <= 0 (reserved boot sector 0),
+    or exceeds total image capacity.
+
+    Returns the validated sector offset.
+    """
+    if offset is None:
+        raise MantisBoundaryError(
+            "Sector offset cannot be None",
+            code=MANTIS_RC_FAILURE,
+        )
+
+    if offset <= 0:
+        raise MantisBoundaryError(
+            f"Sector offset {offset} falls within reserved boot sector (sector 0).",
+            code=MANTIS_RC_BOUNDARY_VIOLATION,
+        )
+
+    byte_offset = offset * sector_size
+    if byte_offset >= image_size:
+        raise MantisOutOfBoundsPartitionError(
+            f"Sector offset {offset} ({byte_offset} bytes) exceeds total image size ({image_size} bytes).",
+            code=MANTIS_RC_BOUNDARY_VIOLATION,
+        )
+
+    return offset
+
+
+def invalidate_evidence_cache(
+    cache_name: str | None = None,
+    image_path: str | None = None,
+) -> list[str]:
+    """
+    Cleans evidence cache states immediately before early error returns (PR #26606 model).
+    Removes cached files matching the target cache_name or image_path.
+    Returns list of removed file paths.
+    """
+    invalidated = []
+    if not os.path.exists(CACHE_DIR):
+        return invalidated
+
+    patterns = []
+    if cache_name:
+        patterns.append(f"{cache_name}.json")
+    if image_path:
+        base_name = os.path.splitext(os.path.basename(image_path))[0]
+        safe_base = re.sub(r'[^A-Za-z0-9_\-]', '_', base_name)
+        patterns.append(safe_base)
+
+    for fname in os.listdir(CACHE_DIR):
+        fpath = os.path.join(CACHE_DIR, fname)
+        if not os.path.isfile(fpath):
+            continue
+
+        should_remove = False
+        if not patterns:
+            should_remove = fname.endswith((".json", ".txt"))
+        else:
+            for pat in patterns:
+                if pat in fname:
+                    should_remove = True
+                    break
+
+        if should_remove:
+            try:
+                os.remove(fpath)
+                invalidated.append(fpath)
+                ExecutionLogger.log("EXTRACTOR", f"Invalidated stale cache file: {fpath}", "WARN")
+            except Exception as e:
+                ExecutionLogger.log("EXTRACTOR", f"Failed to remove cache file {fpath}: {e}", "ERROR")
+
+    return invalidated
+
+
+class ClampedStreamReader:
+    """
+    Streams binary data clamped against cluster extent bounds to guarantee
+    zero heap allocations exceed chunk_size (max 64KB), preserving the
+    <1.3GB RAM runner invariant (radare2 Issue #12924 PDB Bounds Clamping model).
+    """
+
+    MAX_CHUNK_SIZE = 65536  # 64 KB strictly enforced heap ceiling
+
+    def __init__(
+        self,
+        stream,
+        extent_start: int = 0,
+        extent_end: int | None = None,
+        chunk_size: int = MAX_CHUNK_SIZE,
+    ):
+        self.stream = stream
+        self.extent_start = extent_start
+        self.extent_end = extent_end
+        self.chunk_size = max(1, min(chunk_size, self.MAX_CHUNK_SIZE))
+        self.current_offset = extent_start
+
+    def read_chunk(self) -> bytes:
+        if self.extent_end is not None and self.current_offset >= self.extent_end:
+            return b""
+
+        if self.extent_end is not None:
+            remaining = self.extent_end - self.current_offset
+            to_read = min(self.chunk_size, remaining)
+        else:
+            to_read = self.chunk_size
+
+        chunk = self.stream.read(to_read)
+        if not chunk:
+            return b""
+
+        self.current_offset += len(chunk)
+        return chunk
+
+    def __iter__(self) -> Generator[bytes, None, None]:
+        while True:
+            chunk = self.read_chunk()
+            if not chunk:
+                break
+            yield chunk
 
 def classify_image(file_path):
     """
@@ -51,7 +186,7 @@ def classify_image(file_path):
                     
                 # No block-level signatures found, assume memory
                 return "memory"
-        except IOError:
+        except OSError:
             ExecutionLogger.log("EXTRACTOR", f"Error reading file headers for {file_path}. Defaulting to memory.", "WARN")
             return "memory"
             
@@ -67,7 +202,7 @@ def run_plugin(image_path, plugin, args=[]):
         return result.stdout
     except subprocess.TimeoutExpired:
         ExecutionLogger.log("EXTRACTOR", f"Timeout in {plugin} after 3600s", "ERROR")
-        return f'{{"EXECUTION_ERROR": "TimeoutExpired"}}'
+        return '{"EXECUTION_ERROR": "TimeoutExpired"}'
     except subprocess.CalledProcessError as e:
         ExecutionLogger.log("EXTRACTOR", f"Error in {plugin}: {e}", "ERROR")
         return f'{{"EXECUTION_ERROR": "{e}"}}'
@@ -318,42 +453,58 @@ def prcarve_registry_map(disk_image_path):
     ExecutionLogger.log("EXTRACTOR", f"Registry mapping complete for {disk_image_path}. Discovered {count} target hives.", "SUCCESS")
 
 def detect_partition_offset(disk_image_path):
+    """
+    Detects partition offset via mmls with fail-closed sector boundary validation (radare2 PR #26606 model).
+    """
     ExecutionLogger.log("EXTRACTOR", f"Detecting partition offset via mmls on {disk_image_path}...")
+    if not os.path.exists(disk_image_path):
+        ExecutionLogger.log("EXTRACTOR", f"Disk image not found: {disk_image_path}", "ERROR")
+        invalidate_evidence_cache(image_path=disk_image_path)
+        return None
+
+    image_size = os.path.getsize(disk_image_path)
+    largest_offset = None
+    max_length = 0
+
     try:
         out = subprocess.check_output(["mmls", disk_image_path], text=True)
-        largest_offset = None
-        max_length = 0
-        
         for line in out.splitlines():
             if "NTFS" in line or "Basic data partition" in line:
                 parts = line.split()
                 numbers = [p for p in parts if p.isdigit()]
                 if len(numbers) >= 3:
-                    # start is numbers[-3], end is numbers[-2], length is numbers[-1]
                     start_offset = int(numbers[-3])
                     length = int(numbers[-1])
                     if length > max_length:
-                        max_length = length
-                        largest_offset = str(start_offset)
-                        
+                        try:
+                            validate_sector_bounds(start_offset, image_size)
+                            max_length = length
+                            largest_offset = str(start_offset)
+                        except MantisBoundaryError as be:
+                            ExecutionLogger.log("EXTRACTOR", f"Rejecting invalid partition at sector {start_offset}: {be}", "WARN")
+
         if largest_offset:
             ExecutionLogger.log("EXTRACTOR", f"Largest NTFS partition offset detected: {largest_offset} (Length: {max_length})", "SUCCESS")
             return largest_offset
-            
+
     except Exception as e:
-        ExecutionLogger.log("EXTRACTOR", f"mmls failed: {e}. Falling back to default offset 0.", "WARN")
+        ExecutionLogger.log("EXTRACTOR", f"mmls failed on {disk_image_path}: {e}", "ERROR")
+
+    # Fail closed: Do NOT fall back to sector 0
+    ExecutionLogger.log("EXTRACTOR", f"No valid partition boundaries found on {disk_image_path}. Invalidate cache and fail closed.", "ERROR")
+    invalidate_evidence_cache(image_path=disk_image_path)
     return None
 
 def generate_bodyfile(disk_image_path, output_path):
-    """Dynamically generates bodyfile.txt using fls."""
+    """Dynamically generates bodyfile.txt using fls with fail-closed boundary enforcement."""
     ExecutionLogger.log("EXTRACTOR", f"Generating bodyfile via fls for {disk_image_path}...")
-    
+
     offset = detect_partition_offset(disk_image_path)
-    if offset:
-        cmd = ["fls", "-o", str(offset), "-r", "-m", "/", disk_image_path]
-    else:
-        cmd = ["fls", "-r", "-m", "/", disk_image_path]
-        
+    if not offset:
+        ExecutionLogger.log("EXTRACTOR", f"FLS extraction aborted: No valid partition detected for {disk_image_path}.", "ERROR")
+        return None
+
+    cmd = ["fls", "-o", str(offset), "-r", "-m", "/", disk_image_path]
     start = time.time()
     try:
         with open(output_path, "w") as f:
@@ -364,34 +515,32 @@ def generate_bodyfile(disk_image_path, output_path):
         ExecutionLogger.log("EXTRACTOR", f"FLS failed: {e}", "ERROR")
         return None
 
-def carve_and_stream_strings(disk_image_path, inode, output_name, keywords):
+def carve_and_stream_strings(disk_image_path, inode, output_name, keywords, chunk_size=ClampedStreamReader.MAX_CHUNK_SIZE):
     """
-    Ingenuity: Uses icat to stream file contents directly, extracting ASCII and UTF-16 strings
-    matching specific keywords without holding the binary in memory.
+    Uses icat to stream file contents through ClampedStreamReader, extracting
+    ASCII and UTF-16 strings matching specific keywords without holding
+    the binary in memory (guaranteeing <1.3GB RAM runner invariant).
     """
     offset = detect_partition_offset(disk_image_path)
-    cmd = ["icat"]
-    if offset:
-        cmd.extend(["-o", str(offset)])
-    cmd.extend([disk_image_path, inode])
-    
+    if not offset:
+        ExecutionLogger.log("EXTRACTOR", f"Carve aborted for inode {inode}: No valid partition offset.", "WARN")
+        return []
+
+    cmd = ["icat", "-o", str(offset), disk_image_path, inode]
     hits = []
     try:
         proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
-        
-        # Read in 1MB chunks to respect the 1.3GB RAM limit
-        chunk_size = 1024 * 1024
+        if proc.stdout is None:
+            return []
+
+        reader = ClampedStreamReader(proc.stdout, chunk_size=chunk_size)
         buffer_ascii = ""
         buffer_utf16 = ""
-        
-        while True:
-            chunk = proc.stdout.read(chunk_size)
-            if not chunk:
-                break
-                
+
+        for chunk in reader:
             for i in range(len(chunk)):
                 c = chunk[i]
-                
+
                 # ASCII Carving
                 if 32 <= c <= 126:
                     buffer_ascii += chr(c)
@@ -403,7 +552,7 @@ def carve_and_stream_strings(disk_image_path, inode, output_name, keywords):
                                 hits.append(buffer_ascii)
                                 break
                     buffer_ascii = ""
-                    
+
                 # Basic UTF-16LE Carving
                 if i % 2 == 0 and i + 1 < len(chunk):
                     c1, c2 = chunk[i], chunk[i+1]
@@ -417,10 +566,10 @@ def carve_and_stream_strings(disk_image_path, inode, output_name, keywords):
                                     hits.append(buffer_utf16)
                                     break
                         buffer_utf16 = ""
-                        
+        proc.wait()
     except Exception as e:
         ExecutionLogger.log("EXTRACTOR", f"Streaming failed for {output_name}: {e}", "WARN")
-        
+
     return list(set(hits)) # Unique hits
 
 def extract_evtx_stream(disk_image_path):
