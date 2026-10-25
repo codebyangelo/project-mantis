@@ -3,7 +3,14 @@ Synthetic Malfind Allocation Fixtures for Project Mantis Verification.
 Generates realistic telemetry allocations for proving the deterministic sieve.
 """
 
-from typing import Dict, List
+import os
+import sys
+
+# Ensure src/ is on sys.path
+SRC_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
+if SRC_DIR not in sys.path:
+    sys.path.insert(0, SRC_DIR)
+
 from mantis.sieve_deterministic import MalfindAllocation
 
 

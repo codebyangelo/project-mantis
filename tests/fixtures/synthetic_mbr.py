@@ -3,8 +3,21 @@ Synthetic MBR/GPT Partition Fixture for Project Mantis.
 Implements binary generation and boundary verification for raw disk blocks.
 """
 
+import os
 import struct
-from typing import Dict, List, Optional, Tuple
+import sys
+
+# Ensure src/ is on sys.path
+SRC_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
+if SRC_DIR not in sys.path:
+    sys.path.insert(0, SRC_DIR)
+
+from mantis.exceptions import (
+    MantisBoundaryError,
+    MantisInvalidBootSignatureError,
+    MantisOutOfBoundsPartitionError,
+    MantisTruncatedBlockError,
+)
 
 MBR_SECTOR_SIZE = 512
 MBR_BOOTSTRAP_SIZE = 446
@@ -18,13 +31,28 @@ PARTITION_TYPE_FAT32 = 0x0B
 PARTITION_TYPE_LINUX = 0x83
 PARTITION_TYPE_GPT_PROTECTIVE = 0xEE
 
-
-from mantis.exceptions import (
-    MantisBoundaryError,
-    MantisTruncatedBlockError,
-    MantisInvalidBootSignatureError,
-    MantisOutOfBoundsPartitionError,
-)
+__all__ = [
+    "MBR_BOOTSTRAP_SIZE",
+    "MBR_MAGIC_SIGNATURE",
+    "MBR_NUM_PARTITIONS",
+    "MBR_PARTITION_ENTRY_SIZE",
+    "MBR_SECTOR_SIZE",
+    "PARTITION_TYPE_FAT32",
+    "PARTITION_TYPE_GPT_PROTECTIVE",
+    "PARTITION_TYPE_LINUX",
+    "PARTITION_TYPE_NTFS",
+    "MantisBoundaryError",
+    "MantisInvalidBootSignatureError",
+    "MantisOutOfBoundsPartitionError",
+    "MantisTruncatedBlockError",
+    "build_mbr",
+    "encode_partition_record",
+    "generate_corrupt_signature_mbr",
+    "generate_gpt_protective_mbr",
+    "generate_truncated_mbr",
+    "generate_valid_ntfs_mbr",
+    "parse_and_validate_mbr",
+]
 
 
 def encode_partition_record(
@@ -50,7 +78,7 @@ def encode_partition_record(
 
 
 def build_mbr(
-    partitions: Optional[List[bytes]] = None,
+    partitions: list[bytes] | None = None,
     signature: bytes = MBR_MAGIC_SIGNATURE,
     bootstrap_filler: bytes = b"\x90",
 ) -> bytes:
@@ -105,8 +133,8 @@ def generate_corrupt_signature_mbr(signature: bytes = b"\x00\x00") -> bytes:
 
 def parse_and_validate_mbr(
     data: bytes,
-    total_image_bytes: Optional[int] = None,
-) -> List[Dict[str, int]]:
+    total_image_bytes: int | None = None,
+) -> list[dict[str, int]]:
     """
     Forensic boundary parser implementing fail-closed invariants.
     Validates sector size, magic trailer, and extent bounds against image capacity.

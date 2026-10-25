@@ -7,9 +7,15 @@ radare2 execution safety, and dumped PE/ELF section reconstruction.
 import io
 import os
 import shutil
+import sys
 import tempfile
 import unittest
 from unittest.mock import MagicMock, patch
+
+# Ensure src/ is on sys.path for test runners executing outside an installed wheel
+SRC_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src"))
+if SRC_DIR not in sys.path:
+    sys.path.insert(0, SRC_DIR)
 
 from mantis.config import CACHE_DIR
 from mantis.exceptions import (
