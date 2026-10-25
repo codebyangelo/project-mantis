@@ -119,8 +119,11 @@ def run_orchestrator():
     env["OPENAI_API_KEY"] = os.environ.get("OPENAI_API_KEY", "")
     env["OPENAI_MODEL_NAME"] = os.environ.get("OPENAI_MODEL_NAME", "gemini-2.5-flash")
     
-    cmd = ["python3", "orchestrator.py"]
-    subprocess.run(cmd, cwd=BASE_DIR, env=env)
+    repo_root = os.path.abspath(os.path.join(BASE_DIR, ".."))
+    src_dir = os.path.join(repo_root, "src")
+    env["PYTHONPATH"] = f"{src_dir}:{env.get('PYTHONPATH', '')}"
+    cmd = ["python3", "-m", "mantis.orchestrator"]
+    subprocess.run(cmd, cwd=repo_root, env=env)
 
 def verify_report():
     print("\n" + "="*50)

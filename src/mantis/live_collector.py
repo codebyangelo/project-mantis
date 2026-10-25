@@ -5,8 +5,8 @@ import socket
 import struct
 import time
 from typing import Dict, List, Tuple, Any
-from config import CACHE_DIR, EVIDENCE_DIR
-from logger import ExecutionLogger
+from .config import CACHE_DIR, EVIDENCE_DIR
+from .logger import ExecutionLogger
 
 # =============================================================================
 # CONSTANTS & CONFIGURATION

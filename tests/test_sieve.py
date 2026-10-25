@@ -2,13 +2,12 @@ import os
 import sys
 import unittest
 
+# Ensure src/ is on sys.path for test runners executing outside an installed wheel
 SRC_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src"))
-MANTIS_DIR = os.path.join(SRC_DIR, "mantis")
-for d in (SRC_DIR, MANTIS_DIR):
-    if d not in sys.path:
-        sys.path.insert(0, d)
+if SRC_DIR not in sys.path:
+    sys.path.insert(0, SRC_DIR)
 
-from sieve_deterministic import AllocationType, MalfindAllocation
+from mantis.sieve_deterministic import AllocationType, MalfindAllocation
 
 
 class TestSieve(unittest.TestCase):

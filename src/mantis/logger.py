@@ -1,6 +1,6 @@
 import sys
 import datetime
-from config import EXECUTION_LOG_PATH
+from .config import EXECUTION_LOG_PATH
 
 class ExecutionLogger:
     TOTAL_PROMPT_TOKENS = 0
