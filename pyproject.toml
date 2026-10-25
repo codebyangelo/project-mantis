@@ -25,7 +25,8 @@ dev = [
 ]
 
 [project.scripts]
-mantis = "mantis.orchestrator:main"
+mantis = "mantis.cli:main"
+mantis-orchestrator = "mantis.orchestrator:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
