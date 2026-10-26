@@ -54,14 +54,14 @@ Detailed architectural specifications are located in [`docs/ARCHITECTURE.md`](do
    To eliminate hallucinated evidence, Mantis forces all LLM providers through strict Pydantic schemas requiring character-for-character verbatim telemetry quotes (`exact_telemetry_quote`). The orchestrator programmatically verifies quotes against raw evidence cache files (`verify_grounding`). Any claim failing exact substring verification is automatically tagged `GROUNDING_VIOLATION` and downgraded.
 2. **Deterministic Pre-Filtering (Assembly & Path Sieve):**
    Before consuming LLM API calls, memory allocations and process structures pass through zero-latency local regex and assembly trampolines (`sieve_deterministic.py`). Redirections (`movabs rax, <addr>; jmp rax`), ROP stubs (`push <addr>; ret`), and known JIT engine protections are classified in 0ms locally.
-3. **Adversarial Falsifier & Challenger Inquest (Beating Mulder):**
+3. **Adversarial Falsifier & Challenger Inquest (Inspired by Mulder):**
    Prior to finalizing malicious verdicts, an adversarial counter-inquest searches for contradictory benign explanations. Routine administrative maintenance tasks (`logrotate`, `cron`, `anacron`) and JIT runtimes (`node`, `java`, `dotnet`) are cleared deterministically at 0ms latency without consuming external API quota.
 4. **Upstream Radare2 Boundary Hardening:**
    Forensic memory dumps and disk images are treated as untrusted inputs. Mantis injects upstream Radare2 security invariants:
    - **Radare2 PR #26606:** Pre-parsing partition and sector bounds (`validate_sector_bounds`) with fail-closed validation before disk seeks.
    - **Radare2 Issue #12924:** Enforcing a strict 64KB heap ceiling (`ClampedStreamReader`) to prevent memory starvation attacks.
    - **Pre-Return Cache Flushing:** Immediate cache invalidation (`invalidate_evidence_cache`) upon read failures to prevent persistent cache poisoning.
-5. **Courtroom Code-Mode (Beating Camel):**
+5. **Courtroom Code-Mode (Inspired by Camel):**
    Natural-language LLM output is inadmissible hearsay in judicial proceedings. Mantis generates standalone, zero-dependency Python reproduction scripts embedded directly in Section 8 of the MITRE incident report. Scripts verify SHA-256 evidence integrity and extract byte-exact proof with deterministic exit codes in under 50ms.
 6. **State Hashing & Deduplication:**
    Candidate entities are fingerprinted via deterministic SHA-256 hashes (`get_state_hash`) covering stable telemetry fields. Unchanged entities across sliding inspection windows bypass redundant LLM re-evaluations.
